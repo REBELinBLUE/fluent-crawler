@@ -3,7 +3,7 @@ sudo: false
 language: php
 
 php:
-  - 7.1.0
+  - 7.1
 
 cache:
   directories:
