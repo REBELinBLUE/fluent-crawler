@@ -4,6 +4,7 @@ namespace REBELinBLUE\Crawler\Tests;
 
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use InvalidArgumentException;
+use REBELinBLUE\Crawler\Crawler;
 
 class CrawlerTest extends CrawlerTestAssertions
 {
@@ -31,11 +32,6 @@ class CrawlerTest extends CrawlerTestAssertions
         // Assert
         $this->assertResponseMatches($crawler, $expected);
     }
-
-//    public function test_visit_throws_exception_on_error()
-//    {
-//
-//    }
 
     public function test_it_can_submit_form_with_button_value()
     {
@@ -278,5 +274,117 @@ class CrawlerTest extends CrawlerTestAssertions
 
         // Act
         $this->crawler->visit('http://example.com')->click('Log out');
+    }
+
+    public function test_it_acts_on_element_within_element()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com')->within('#container', function () {
+            $this->crawler->type('Joe Bloggs', 'name');
+        });
+
+        // Assert
+        $this->assertIsCrawler($crawler);
+    }
+
+    public function test_it_throws_an_invalid_argument_exception_when_acting_within_a_missing_element()
+    {
+        // Assert
+        $this->expectException(InvalidArgumentException::class);
+
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $this->crawler->visit('http://example.com')->within('#myForm', function () {
+            $this->crawler->type('Joe Bloggs', 'name');
+        });
+    }
+
+    public function test_it_sees_string_in_page()
+    {
+        // Arrange
+        $expected = '<h1>Hello world!</h1>';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->see($expected));
+        $this->assertFalse($crawler->dontSee($expected));
+    }
+
+    public function test_it_doesnt_see_string_in_page()
+    {
+        // Arrange
+        $notExpected = '<p>Foo bar</p>';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->dontSee($notExpected));
+        $this->assertFalse($crawler->see($notExpected));
+    }
+
+    public function test_it_sees_text_in_page()
+    {
+        // Arrange
+        $expected = 'Hello world!';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->seeText($expected));
+        $this->assertFalse($crawler->dontSeeText($expected));
+    }
+
+    public function test_it_doesnt_see_text_in_page()
+    {
+        // Arrange
+        $notExpected = 'Foo bar';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->dontSeeText($notExpected));
+        $this->assertFalse($crawler->seeText($notExpected));
+    }
+
+    public function test_it_sees_element_page()
+    {
+        // Arrange
+        $expected = '#container';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->seeElement($expected));
+        $this->assertFalse($crawler->dontSeeElement($expected));
+    }
+
+    public function test_it_doesnt_see_element_in_page()
+    {
+        // Arrange
+        $notExpected = '#banner';
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertTrue($crawler->dontSeeElement($notExpected));
+        $this->assertFalse($crawler->seeElement($notExpected));
     }
 }

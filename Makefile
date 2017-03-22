@@ -7,7 +7,7 @@ WHITE  := $(shell tput -Txterm setaf 7)
 YELLOW := $(shell tput -Txterm setaf 3)
 RESET  := $(shell tput -Txterm sgr0)
 
-test: lint phpcs phpmd phpunit phpstan
+test: lint phpcs phpunit phpstan phpmd
 
 install:
 	composer install --prefer-source --no-interaction --no-suggest
@@ -40,6 +40,10 @@ lint:
 ## Fix PHP syntax with code sniffer
 fix:
 	@php vendor/bin/php-cs-fixer --no-interaction fix
+
+## Generate the public API docs
+docs:
+	@echo "Nothing here"
 
 ## Test Coverage HTML
 coverage:

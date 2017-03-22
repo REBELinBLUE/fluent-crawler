@@ -5,3 +5,5 @@
 [![Code Coverage](https://img.shields.io/codecov/c/github/REBELinBLUE/fluent-crawler/master.svg?style=flat-square&label=Coverage)](https://codecov.io/gh/REBELinBLUE/fluent-crawler)
 
 A fork of [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing/blob/master/src/Concerns/InteractsWithPages.php) to use as a standalone crawler with a nice fluent interface.
+
+## API
