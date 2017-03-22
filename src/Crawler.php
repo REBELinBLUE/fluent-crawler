@@ -18,19 +18,23 @@ class Crawler
 {
     use PageAssertions, InteractsWithPage;
 
-    /** @var DomCrawler[] */
-    protected $subCrawlers = [];
-
-    /** @var array  */
-    protected $inputs = [];
-
-    /** @var DomCrawler */
+    /** @var DomCrawler $crawler */
     protected $crawler;
 
-    /** @var Client */
-    protected $client;
+    /** @var DomCrawler[] $subCrawlers */
+    protected $subCrawlers = [];
 
-    public function __construct(Client $client)
+    /** @var array $inputs  */
+    protected $inputs = [];
+
+    /** @var Client $client */
+    private $client;
+
+    /**
+     * Constructor can take an instance of \Goutte\Client,
+     * otherwise one will be initialized when needed.
+     */
+    public function __construct(?Client $client = null)
     {
         $this->client = $client;
     }
@@ -46,11 +50,25 @@ class Crawler
         return $this->makeRequest('GET', $uri);
     }
 
+    /**
+     * Get the HTTP client instance.
+     *
+     * @return Client
+     */
+    public function getClient(): Client
+    {
+        if (!$this->client) {
+            $this->client = new Client();
+        }
+
+        return $this->client;
+    }
+
     protected function makeRequest(string $method, string $uri, array $parameters = []): self
     {
         $this->resetPageContext();
 
-        $this->crawler = $this->client->request($method, $uri, $parameters);
+        $this->crawler = $this->getClient()->request($method, $uri, $parameters);
 
         $this->clearInputs();
 

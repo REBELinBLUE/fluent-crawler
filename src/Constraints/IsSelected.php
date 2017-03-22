@@ -70,5 +70,7 @@ class IsSelected extends FormFieldConstraint
                 return $radio->getAttribute('value');
             }
         }
+
+        return null;
     }
 }

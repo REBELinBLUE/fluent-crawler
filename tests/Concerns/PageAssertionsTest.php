@@ -2,6 +2,7 @@
 
 namespace REBELinBLUE\Crawler\Tests\Concerns;
 
+use InvalidArgumentException;
 use REBELinBLUE\Crawler\Tests\CrawlerTestAssertions;
 
 class PageAssertionsTest extends CrawlerTestAssertions
@@ -62,7 +63,7 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeText($notExpected));
     }
 
-    public function test_it_sees_element_page()
+    public function test_it_sees_element_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -74,6 +75,36 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $expected = '#container';
         $this->assertTrue($crawler->seeElement($expected));
         $this->assertFalse($crawler->dontSeeElement($expected));
+    }
+
+    public function test_it_sees_element_with_attribute_value_in_page()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $attributes = ['align' => 'center'];
+        $selector   = 'p';
+        $this->assertTrue($crawler->seeElement($selector, $attributes));
+        $this->assertFalse($crawler->dontSeeElement($selector, $attributes));
+    }
+
+    public function test_it_sees_element_with_attribute_in_page()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $attributes = ['align'];
+        $selector   = 'p';
+        $this->assertTrue($crawler->seeElement($selector, $attributes));
+        $this->assertFalse($crawler->dontSeeElement($selector, $attributes));
     }
 
     public function test_it_doesnt_see_element_in_page()
@@ -88,6 +119,36 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $notExpected = '#banner';
         $this->assertTrue($crawler->dontSeeElement($notExpected));
         $this->assertFalse($crawler->seeElement($notExpected));
+    }
+
+    public function test_it_doesnt_see_element_with_attribute_value_in_page()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $attributes = ['align' => 'right'];
+        $selector   = 'p';
+        $this->assertTrue($crawler->dontSeeElement($selector, $attributes));
+        $this->assertFalse($crawler->seeElement($selector, $attributes));
+    }
+
+    public function test_it_doesnt_see_element_with_attribute_in_page()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $attributes = ['style'];
+        $selector   = 'p';
+        $this->assertTrue($crawler->dontSeeElement($selector, $attributes));
+        $this->assertFalse($crawler->seeElement($selector, $attributes));
     }
 
     public function test_it_sees_string_in_element()
@@ -356,7 +417,7 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_radiobox_is_selected_when_none_selected()
+    public function test_it_doesnt_see_radiobox_is_selected_when_none_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -369,5 +430,17 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $selector = 'colour';
         $this->assertTrue($crawler->dontSeeIsSelected($selector, $expected));
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
+    }
+
+    public function test_it_throws_an_invalid_argument_exception_when_field_missing()
+    {
+        // Assert
+        $this->expectException(InvalidArgumentException::class);
+
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $this->crawler->visit('http://example.com')->seeInField('surname', 'Smith');
     }
 }

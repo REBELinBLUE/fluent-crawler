@@ -69,7 +69,6 @@ return PhpCsFixer\Config::create()
         'random_api_migration'                        => true,
         'self_accessor'                               => true,
         'semicolon_after_instruction'                 => true,
-        'simplified_null_return'                      => true,
         'single_blank_line_at_eof'                    => true,
         'single_blank_line_before_namespace'          => true,
         'single_quote'                                => true,

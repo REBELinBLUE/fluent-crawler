@@ -2,7 +2,6 @@
 
 namespace REBELinBLUE\Crawler\Concerns;
 
-use Goutte\Client;
 use REBELinBLUE\Crawler\Constraints\HasElement;
 use REBELinBLUE\Crawler\Constraints\HasInElement;
 use REBELinBLUE\Crawler\Constraints\HasLink;
@@ -158,26 +157,6 @@ trait PageAssertions
     }
 
     /**
-     * Get the HTTP client instance.
-     *
-     * @return Client
-     */
-    public function getClient(): Client
-    {
-        return $this->client;
-    }
-
-    /**
-     * Get the response object instance for the most recent request.
-     *
-     * @return Response
-     */
-    public function getResponse(): Response
-    {
-        return $this->client->getResponse();
-    }
-
-    /**
      * Checks that the expected value is selected.
      *
      * @param  string $selector
@@ -223,9 +202,19 @@ trait PageAssertions
         return $this->assertNotInPage(new IsChecked($selector));
     }
 
+    /**
+     * Get the response object instance for the most recent request.
+     *
+     * @return Response
+     */
+    public function getResponse(): Response
+    {
+        return $this->getClient()->getResponse();
+    }
+
     protected function assertInPage(PageConstraint $constraint): bool
     {
-        return $constraint->matches($this->crawler() ?: $this->client->getResponse()->getContent());
+        return $constraint->matches($this->crawler() ?: $this->getResponse()->getContent());
     }
 
     protected function assertNotInPage(PageConstraint $constraint): bool
