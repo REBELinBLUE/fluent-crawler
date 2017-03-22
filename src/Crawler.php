@@ -90,6 +90,11 @@ class Crawler
         return $this->response;
     }
 
+    public function getClient(): Client
+    {
+        return $this->client;
+    }
+
     protected function makeRequest(string $method, string $uri, array $parameters = []): self
     {
         $this->resetPageContext();
