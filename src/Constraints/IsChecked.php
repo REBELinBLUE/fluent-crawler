@@ -24,7 +24,6 @@ class IsChecked extends FormFieldConstraint
     {
         return [
             'input[type="checkbox"]',
-            'input[type="radio"]',
         ];
     }
 }

@@ -7,13 +7,41 @@
 <body>
     <form id="my-form">
         <input type="text" name="name" value="Bob Smith" />
+
         <input type="checkbox" value="on" name="confirm" />
         <input type="checkbox" value="on" name="newsletter" checked />
+
         <select name="country">
             <option value="fr" selected>France</option>
             <option value="uk">UK</option>
             <option value="us">USA</option>
         </select>
+        <select name="season">
+            <option selected>Spring</option>
+            <option>Summer</option>
+            <option>Autumn</option>
+            <option>Winter</option>
+        </select>
+        <select name="food">
+            <optgroup label="Dairy">
+                <option>Cheese</option>
+                <option selected>Egg</option>
+            </optgroup>
+            <optgroup label="Vegetables">
+                <option>Cabbage</option>
+                <option>Lettuce</option>
+                <option>Onions</option>
+                <option>Courgettes</option>
+            </optgroup>
+        </select>
+
+        <input type="radio" value="m" name="sex" checked /> Male
+        <input type="radio" value="f" name="sex" /> Female
+
+        <input type="radio" value="red" name="colour" /> Red
+        <input type="radio" value="green" name="colour" /> Green
+        <input type="radio" value="blue" name="colour" /> Blue
+
         <input type="submit" value="Login" />
     </form>
 </body>

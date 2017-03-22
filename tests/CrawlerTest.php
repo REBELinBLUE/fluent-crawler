@@ -2,8 +2,6 @@
 
 namespace REBELinBLUE\Crawler\Tests;
 
-use REBELinBLUE\Crawler\Crawler;
-
 class CrawlerTest extends CrawlerTestAssertions
 {
     public function test_it_returns_correct_client()

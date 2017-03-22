@@ -63,10 +63,6 @@ class IsSelected extends FormFieldConstraint
         return $option->textContent;
     }
 
-    /**
-     * @param  \Symfony\Component\DomCrawler\Crawler $radioGroup
-     * @return string|null
-     */
     protected function getCheckedValueFromRadioGroup(Crawler $radioGroup): ?string
     {
         foreach ($radioGroup as $radio) {

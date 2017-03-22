@@ -208,7 +208,7 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeInField($field, $notExpected));
     }
 
-    public function test_it_sees_option_is_selected()
+    public function test_it_sees_option_with_value_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -223,7 +223,37 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_option_is_selected()
+    public function test_it_sees_option_with_text_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'Spring';
+        $selector = 'season';
+        $this->assertTrue($crawler->seeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
+    }
+
+    public function test_it_sees_grouped_option_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'Egg';
+        $selector = 'food';
+        $this->assertTrue($crawler->seeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
+    }
+
+    public function test_it_doesnt_see_option_with_value_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -236,6 +266,36 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $selector    = 'country';
         $this->assertTrue($crawler->dontSeeIsSelected($selector, $notExpected));
         $this->assertFalse($crawler->seeIsSelected($selector, $notExpected));
+    }
+
+    public function test_it_doesnt_see_option_with_text_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'Winter';
+        $selector = 'season';
+        $this->assertTrue($crawler->dontSeeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->seeIsSelected($selector, $expected));
+    }
+
+    public function test_it_doesnt_see_grouped_option_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'Onions';
+        $selector = 'food';
+        $this->assertTrue($crawler->dontSeeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
     public function test_it_sees_checkbox_is_checked()
@@ -264,5 +324,50 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $expected = 'confirm';
         $this->assertTrue($crawler->dontSeeIsChecked($expected));
         $this->assertFalse($crawler->seeIsChecked($expected));
+    }
+
+    public function test_it_sees_radiobox_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'm';
+        $selector = 'sex';
+        $this->assertTrue($crawler->seeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
+    }
+
+    public function test_it_doesnt_see_radiobox_is_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'f';
+        $selector = 'sex';
+        $this->assertTrue($crawler->dontSeeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->seeIsSelected($selector, $expected));
+    }
+
+    public function test_it_doesnt_see_radiobox_is_selected_when_none_selected()
+    {
+        // Arrange
+        $this->mockResponse($this->getFile('form.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $expected = 'red';
+        $selector = 'colour';
+        $this->assertTrue($crawler->dontSeeIsSelected($selector, $expected));
+        $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 }

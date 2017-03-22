@@ -2,6 +2,7 @@
 
 namespace REBELinBLUE\Crawler\Constraints;
 
+use InvalidArgumentException;
 use Symfony\Component\DomCrawler\Crawler;
 
 abstract class FormFieldConstraint extends PageConstraint
@@ -26,12 +27,11 @@ abstract class FormFieldConstraint extends PageConstraint
             return $field;
         }
 
-        // FIXME: Throw an error
-
-//        $this->fail($crawler, sprintf(
-//            'There is no %s with the name or ID [%s]',
-//            $this->validElements(), $this->selector
-//        ));
+        throw new InvalidArgumentException(sprintf(
+            'There is no %s with the name or ID [%s]',
+            implode(',', $this->validElements()),
+            $this->selector
+        ));
     }
 
     protected function getElements(): array
