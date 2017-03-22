@@ -9,6 +9,9 @@ use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\DomCrawler\Crawler as DomCrawler;
 use Symfony\Component\DomCrawler\Form;
 
+/**
+ * A fluent interface to Symfony Crawler using Goutte.
+ */
 class Crawler
 {
     /** @var DomCrawler[] */
@@ -16,14 +19,12 @@ class Crawler
 
     /** @var array  */
     protected $inputs = [];
+
     /** @var DomCrawler */
     private $crawler;
 
     /** @var Client */
     private $client;
-
-    /** @var Response */
-    private $response;
 
     public function __construct(Client $client)
     {
@@ -86,7 +87,7 @@ class Crawler
 
     public function getResponse(): Response
     {
-        return $this->response;
+        return $this->client->getResponse();
     }
 
     public function getClient(): Client
@@ -109,8 +110,7 @@ class Crawler
     {
         $this->resetPageContext();
 
-        $this->crawler  = $this->client->request($method, $uri, $parameters);
-        $this->response = $this->client->getResponse();
+        $this->crawler = $this->client->request($method, $uri, $parameters);
 
         $this->clearInputs(); //->followRedirects();
 
@@ -187,12 +187,12 @@ class Crawler
 
     protected function filterByNameOrId(string $name, string $elements = '*'): DomCrawler
     {
-        $name      = str_replace('#', '', $name);
-        $identifer = str_replace(['[', ']'], ['\\[', '\\]'], $name);
-        $elements  = is_array($elements) ? $elements : [$elements];
+        $name       = str_replace('#', '', $name);
+        $identifier = str_replace(['[', ']'], ['\\[', '\\]'], $name);
+        $elements   = is_array($elements) ? $elements : [$elements];
 
-        array_walk($elements, function (&$element) use ($name, $identifer) {
-            $element = "{$element}#{$identifer}, {$element}[name='{$name}']";
+        array_walk($elements, function (&$element) use ($name, $identifier) {
+            $element = "{$element}#{$identifier}, {$element}[name='{$name}']";
         });
 
         return $this->crawler()->filter(implode(', ', $elements));
