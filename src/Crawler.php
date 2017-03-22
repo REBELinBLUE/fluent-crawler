@@ -38,7 +38,7 @@ class Crawler
 
     /**
      * @param string|array $buttonText
-     * @param array|null $inputs
+     * @param array|null   $inputs
      *
      * @return Crawler
      */
@@ -96,11 +96,6 @@ class Crawler
         return $this->client->getResponse();
     }
 
-    public function getClient(): Client
-    {
-        return $this->client;
-    }
-
     public function within($element, Closure $callback)
     {
         $this->subCrawlers[] = $this->crawler()->filter($element);
@@ -110,6 +105,11 @@ class Crawler
         array_pop($this->subCrawlers);
 
         return $this;
+    }
+
+    public function getClient(): Client
+    {
+        return $this->client;
     }
 
     protected function makeRequest(string $method, string $uri, array $parameters = []): self
@@ -133,8 +133,8 @@ class Crawler
     }
 
     /**
-     * @param string|array $buttonText
-     * @param array|null $inputs
+     * @param  string|array $buttonText
+     * @param  array|null   $inputs
      * @return $this
      */
     protected function fillForm($buttonText, ?array $inputs = [])
@@ -157,7 +157,7 @@ class Crawler
             return $this->crawler()->filter('form')->form();
         } catch (InvalidArgumentException $e) {
             throw new InvalidArgumentException(
-                "Could not find a form that has submit button" . ($buttonText ? "[{$buttonText}]" : '')
+                'Could not find a form that has submit button' . ($buttonText ? "[{$buttonText}]" : '')
             );
         }
     }
@@ -192,9 +192,7 @@ class Crawler
         $crawler = $this->filterByNameOrId($filter);
 
         if (!count($crawler)) {
-            throw new InvalidArgumentException(
-                "Nothing matched the filter [{$filter}] CSS query provided for ..." // [{$this->currentUri}]."
-            );
+            throw new InvalidArgumentException("Nothing matched the filter [{$filter}] CSS query provided");
         }
     }
 
