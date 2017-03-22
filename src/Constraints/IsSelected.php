@@ -8,8 +8,6 @@ use Symfony\Component\DomCrawler\Crawler;
 class IsSelected extends FormFieldConstraint
 {
     /**
-     * Determine if the select or radio element is selected.
-     *
      * @param  \Symfony\Component\DomCrawler\Crawler|string $crawler
      * @return bool
      */
@@ -31,7 +29,10 @@ class IsSelected extends FormFieldConstraint
 
     protected function validElements(): array
     {
-        return ['select', 'input[type="radio"]'];
+        return [
+            'select',
+            'input[type="radio"]',
+        ];
     }
 
     protected function getSelectedValueFromSelect(Crawler $select): array

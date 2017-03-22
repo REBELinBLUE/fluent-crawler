@@ -36,17 +36,14 @@ abstract class FormFieldConstraint extends PageConstraint
 
     protected function getElements(): array
     {
-        return [];
+        $name       = str_replace('#', '', $this->selector);
+        $identifier = str_replace(['[', ']'], ['\\[', '\\]'], $name);
 
-//        $name       = str_replace('#', '', $this->selector);
-//        $identifier = str_replace(['[', ']'], ['\\[', '\\]'], $name);
+        $elements = $this->validElements();
+        array_walk($elements, function (&$element) use ($name, $identifier) {
+            $element = "{$element}#{$identifier}, {$element}[name='{$name}']";
+        });
 
-//        array_walk($elements, function (&$element) use ($name, $identifier) {
-//            $element = "{$element}#{$identifier}, {$element}[name='{$name}']";
-//        });
-//
-//        return collect($this->validElements())->map(function ($element) use ($name, $identifier) {
-//            return "{$element}#{$identifier}, {$element}[name='{$name}']";
-//        })->all();
+        return $elements;
     }
 }

@@ -26,6 +26,9 @@ class HasValue extends FormFieldConstraint
 
     protected function validElements(): array
     {
-        return ['input', 'textarea'];
+        return [
+            'input',
+            'textarea',
+        ];
     }
 }

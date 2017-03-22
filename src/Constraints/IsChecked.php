@@ -6,7 +6,7 @@ class IsChecked extends FormFieldConstraint
 {
     public function __construct($selector)
     {
-        $this->selector = $selector;
+        parent::__construct($selector, null);
     }
 
     /**
@@ -22,6 +22,9 @@ class IsChecked extends FormFieldConstraint
 
     protected function validElements(): array
     {
-        return ['input[type="checkbox"]'];
+        return [
+            'input[type="checkbox"]',
+            'input[type="radio"]',
+        ];
     }
 }

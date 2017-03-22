@@ -18,8 +18,8 @@ install:
 script:
   - make lint
   - make phpcs
-#  - make phpmd
-#  - make phpstan
+  - make phpmd
+  - make phpstan
   - make coverage
 #  - make phpcpd
 #  - make lines

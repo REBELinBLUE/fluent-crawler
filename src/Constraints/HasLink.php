@@ -35,25 +35,14 @@ class HasLink extends PageConstraint
             return true;
         }
 
-        $absoluteUrl = $this->absoluteUrl();
-
         foreach ($links as $link) {
             $linkHref = $link->getAttribute('href');
 
-            if ($linkHref === $this->url || $linkHref === $absoluteUrl) {
+            if ($linkHref === $this->url) {
                 return true;
             }
         }
 
         return false;
-    }
-
-    protected function absoluteUrl()
-    {
-        //        if (! Str::startsWith($this->url, ['http', 'https'])) {
-//            return URL::to($this->url);
-//        }
-
-        return $this->url;
     }
 }
