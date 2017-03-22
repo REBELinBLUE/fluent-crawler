@@ -16,6 +16,7 @@ Makefile text
 .gitconfig text
 
 # code analysis config
+.php_cs.dist text
 *.dist text
 *.xml text
 *.yml text
@@ -39,6 +40,7 @@ tests/ export-ignore
 .codecov.yml export-ignore
 .travis.yml export-ignore
 .styleci.yml export-ignore
+.php_cs.dist export-ignore
 phpunit.xml.dist export-ignore
 Makefile export-ignore
 

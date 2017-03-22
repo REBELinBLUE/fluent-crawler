@@ -28,7 +28,7 @@ class CrawlerTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->client = new GoutteClient();
+        $this->client  = new GoutteClient();
         $this->crawler = new Crawler($this->client);
     }
 
@@ -70,18 +70,17 @@ class CrawlerTest extends PHPUnit_Framework_TestCase
             $responses = [new GuzzleResponse(200, [], '<html><body><p>Hi</p></body></html>')];
         }
 
-        $this->mock = new MockHandler($responses);
-        $handlerStack = HandlerStack::create($this->mock);
+        $this->mock    = new MockHandler($responses);
+        $handlerStack  = HandlerStack::create($this->mock);
         $this->history = [];
 
         $handlerStack->push(Middleware::history($this->history));
         $guzzle = new GuzzleClient([
             'redirect.disable' => true,
-            'base_uri' => '',
-            'handler' => $handlerStack
+            'base_uri'         => '',
+            'handler'          => $handlerStack,
         ]);
 
         return $guzzle;
     }
-
 }

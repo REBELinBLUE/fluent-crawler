@@ -39,7 +39,7 @@ lint:
 
 ## Fix PHP syntax with code sniffer
 fix:
-	@php vendor/bin/php-cs-fixer fix src/ -vv --level=psr2
+	@php vendor/bin/php-cs-fixer --no-interaction fix
 
 ## Test Coverage HTML
 coverage:

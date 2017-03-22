@@ -3,22 +3,21 @@
 namespace REBELinBLUE\Crawler;
 
 use Closure;
+use Goutte\Client;
 use InvalidArgumentException;
 use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\DomCrawler\Crawler as DomCrawler;
-use Goutte\Client;
 use Symfony\Component\DomCrawler\Form;
 
 class Crawler
 {
-    /** @var DomCrawler */
-    private $crawler;
-
     /** @var DomCrawler[] */
     protected $subCrawlers = [];
 
     /** @var array  */
     protected $inputs = [];
+    /** @var DomCrawler */
+    private $crawler;
 
     /** @var Client */
     private $client;
@@ -95,11 +94,22 @@ class Crawler
         return $this->client;
     }
 
+    public function within($element, Closure $callback)
+    {
+        $this->subCrawlers[] = $this->crawler()->filter($element);
+
+        $callback();
+
+        array_pop($this->subCrawlers);
+
+        return $this;
+    }
+
     protected function makeRequest(string $method, string $uri, array $parameters = []): self
     {
         $this->resetPageContext();
 
-        $this->crawler = $this->client->request($method, $uri, $parameters);
+        $this->crawler  = $this->client->request($method, $uri, $parameters);
         $this->response = $this->client->getResponse();
 
         $this->clearInputs(); //->followRedirects();
@@ -119,7 +129,7 @@ class Crawler
     protected function fillForm(string $buttonText, $inputs = [])
     {
         if (!is_string($buttonText)) {
-            $inputs = $buttonText;
+            $inputs     = $buttonText;
             $buttonText = null;
         }
 
@@ -194,11 +204,6 @@ class Crawler
         $this->subCrawlers = [];
     }
 
-
-
-
-
-
 //
 //    public function followRedirects(): self
 //    {
@@ -209,13 +214,6 @@ class Crawler
 //        return $this;
 //    }
 
-
-
-
-
-
-
-
     protected function crawler()
     {
         if (!empty($this->subCrawlers)) {
@@ -223,15 +221,5 @@ class Crawler
         }
 
         return $this->crawler;
-    }
-
-    public function within($element, Closure $callback)
-    {
-        $this->subCrawlers[] = $this->crawler()->filter($element);
-
-        $callback();
-
-        array_pop($this->subCrawlers);
-        return $this;
     }
 }
