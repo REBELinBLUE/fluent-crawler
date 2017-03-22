@@ -36,7 +36,13 @@ class Crawler
         return $this->makeRequest('GET', $uri);
     }
 
-    public function submitForm(string $buttonText, array $inputs = [])
+    /**
+     * @param string|array $buttonText
+     * @param array|null $inputs
+     *
+     * @return Crawler
+     */
+    public function submitForm($buttonText, ?array $inputs = [])
     {
         return $this->makeRequestUsingForm($this->fillForm($buttonText, $inputs));
     }
@@ -126,7 +132,12 @@ class Crawler
         );
     }
 
-    protected function fillForm(string $buttonText, $inputs = [])
+    /**
+     * @param string|array $buttonText
+     * @param array|null $inputs
+     * @return $this
+     */
+    protected function fillForm($buttonText, ?array $inputs = [])
     {
         if (!is_string($buttonText)) {
             $inputs     = $buttonText;
@@ -145,7 +156,9 @@ class Crawler
 
             return $this->crawler()->filter('form')->form();
         } catch (InvalidArgumentException $e) {
-            throw new InvalidArgumentException("Could not find a form that has submit button [{$buttonText}].");
+            throw new InvalidArgumentException(
+                "Could not find a form that has submit button" . ($buttonText ? "[{$buttonText}]" : '')
+            );
         }
     }
 

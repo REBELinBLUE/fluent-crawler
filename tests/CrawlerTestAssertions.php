@@ -12,7 +12,7 @@ use PHPUnit_Framework_TestCase;
 use REBELinBLUE\Crawler\Crawler;
 use Symfony\Component\BrowserKit\Response;
 
-abstract class CrawlerTestCase extends PHPUnit_Framework_TestCase
+abstract class CrawlerTestAssertions extends PHPUnit_Framework_TestCase
 {
     /** @var GoutteClient $client */
     protected $client;
@@ -34,9 +34,14 @@ abstract class CrawlerTestCase extends PHPUnit_Framework_TestCase
 
     protected function assertResponseMatches(Crawler $crawler, string $expected)
     {
+        $this->assertIsCrawler($crawler);
+        $this->assertSame($expected, $crawler->getResponse()->getContent());
+    }
+
+    protected function assertIsCrawler(Crawler $crawler)
+    {
         $this->assertSame($this->crawler, $crawler);
         $this->assertInstanceOf(Response::class, $crawler->getResponse());
-        $this->assertSame($expected, $crawler->getResponse()->getContent());
     }
 
     protected function mockResponse(string $body, int $status = 200)
@@ -71,5 +76,10 @@ abstract class CrawlerTestCase extends PHPUnit_Framework_TestCase
         ]);
 
         return $guzzle;
+    }
+
+    protected function getFile($filename)
+    {
+        return file_get_contents(__DIR__ . '/files/' . $filename);
     }
 }
