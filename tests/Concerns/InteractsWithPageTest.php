@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use InvalidArgumentException;
 use REBELinBLUE\Crawler\Tests\CrawlerTestAssertions;
 
-class CrawlerTest extends CrawlerTestAssertions
+class InteractsWithPageTest extends CrawlerTestAssertions
 {
     public function test_it_can_submit_form_with_button_value()
     {
