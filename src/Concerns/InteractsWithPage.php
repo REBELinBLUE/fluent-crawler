@@ -26,6 +26,22 @@ trait InteractsWithPage
     }
 
     /**
+     * Filter the content to a specific area of the page and pass to the callback.
+     *
+     * @param  string  $element
+     * @param  Closure $callback
+     * @return $this
+     */
+    public function filter(string $element, Closure $callback): self
+    {
+        $crawler = $this->crawler()->filter($element);
+
+        $callback($crawler);
+
+        return $this;
+    }
+
+    /**
      * Submit a form on the page with the given input.
      *
      * @param  string|array $buttonText

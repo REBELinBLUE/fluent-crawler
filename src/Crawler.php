@@ -21,16 +21,16 @@ class Crawler
     use PageAssertions, InteractsWithPage,
         ResponseAssertions, MakesHttpRequests;
 
-    /** @var DomCrawler $crawler */
+    /** @var DomCrawler */
     protected $crawler;
 
-    /** @var DomCrawler[] $subCrawlers */
+    /** @var DomCrawler[] */
     protected $subCrawlers = [];
 
-    /** @var array $inputs  */
+    /** @var array  */
     protected $inputs = [];
 
-    /** @var Client $client */
+    /** @var Client */
     private $client;
 
     /**
