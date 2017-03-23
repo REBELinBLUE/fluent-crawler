@@ -11,7 +11,7 @@ trait ResponseAssertions
      */
     public function isOk(): bool
     {
-        return $this->seeStatusCode(200);
+        return $this->isStatusCode(200);
     }
 
     /**
@@ -22,7 +22,7 @@ trait ResponseAssertions
      */
     public function isStatusCode(int $code): bool
     {
-        return $this->getResponse()->getStatusCode() === $code;
+        return $this->getClient()->getResponse()->getStatus() === $code;
     }
 
     /**

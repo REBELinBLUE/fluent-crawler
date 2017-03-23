@@ -5,6 +5,7 @@ namespace REBELinBLUE\Crawler\Tests\Concerns;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use InvalidArgumentException;
 use REBELinBLUE\Crawler\Tests\CrawlerTestAssertions;
+use Symfony\Component\DomCrawler\Crawler;
 
 class InteractsWithPageTest extends CrawlerTestAssertions
 {
@@ -276,5 +277,20 @@ class InteractsWithPageTest extends CrawlerTestAssertions
         $this->crawler->visit('http://example.com')->within('#myForm', function () {
             $this->crawler->type('Joe Bloggs', 'name');
         });
+    }
+
+    public function test_it_can_filter()
+    {
+
+        // Arrange
+        $this->mockResponse($this->getFile('welcome.html'));
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com')->filter('#container', function ($element) {
+            $this->assertInstanceOf(Crawler::class, $element);
+        });
+
+        // Assert
+        $this->assertIsCrawler($crawler);
     }
 }

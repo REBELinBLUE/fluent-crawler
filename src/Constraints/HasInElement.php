@@ -6,8 +6,10 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class HasInElement extends PageConstraint
 {
+    /** @var string */
     protected $element;
 
+    /** @var string */
     protected $text;
 
     public function __construct(string $element, string $text)

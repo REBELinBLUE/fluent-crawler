@@ -4,8 +4,10 @@ namespace REBELinBLUE\Crawler\Constraints;
 
 class HasLink extends PageConstraint
 {
+    /** @var string */
     protected $text;
 
+    /** @var string|null */
     protected $url;
 
     public function __construct(string $text, ?string $url = null)
@@ -31,7 +33,7 @@ class HasLink extends PageConstraint
         // If the URL is null we assume the developer only wants to find a link
         // with the given text regardless of the URL. So if we find the link
         // we will return true. Otherwise, we will look for the given URL.
-        if ($this->url === null) {
+        if (is_null($this->url)) {
             return true;
         }
 

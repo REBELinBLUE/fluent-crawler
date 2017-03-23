@@ -4,6 +4,7 @@ namespace REBELinBLUE\Crawler\Constraints;
 
 class HasSource extends PageConstraint
 {
+    /** @var string */
     protected $source;
 
     public function __construct(string $source)

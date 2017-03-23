@@ -7,8 +7,10 @@ use Symfony\Component\DomCrawler\Crawler;
 
 abstract class FormFieldConstraint extends PageConstraint
 {
+    /** @var string */
     protected $selector;
 
+    /** @var string */
     protected $value;
 
     public function __construct(string $selector, $value)

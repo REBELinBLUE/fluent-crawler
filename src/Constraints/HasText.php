@@ -4,6 +4,7 @@ namespace REBELinBLUE\Crawler\Constraints;
 
 class HasText extends PageConstraint
 {
+    /** @var string */
     protected $text;
 
     public function __construct(string $text)
