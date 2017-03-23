@@ -14,7 +14,7 @@ trait InteractsWithPage
      * @param  Closure $callback
      * @return $this
      */
-    public function within(string $element, Closure $callback)
+    public function within(string $element, Closure $callback): self
     {
         $this->subCrawlers[] = $this->crawler()->filter($element);
 
@@ -28,12 +28,11 @@ trait InteractsWithPage
     /**
      * Submit a form on the page with the given input.
      *
-     * @param string|array $buttonText
-     * @param array|null   $inputs
-     *
-     * @return Crawler
+     * @param  string|array $buttonText
+     * @param  array|null   $inputs
+     * @return $this
      */
-    public function submitForm($buttonText, ?array $inputs = [])
+    public function submitForm($buttonText, ?array $inputs = []): self
     {
         return $this->makeRequestUsingForm($this->fillForm($buttonText, $inputs));
     }
@@ -45,7 +44,7 @@ trait InteractsWithPage
      * @throws InvalidArgumentException
      * @return $this
      */
-    public function click(string $name)
+    public function click(string $name): self
     {
         $link = $this->crawler()->selectLink($name);
 
@@ -67,9 +66,9 @@ trait InteractsWithPage
     /**
      * Fill an input field with the given text.
      *
-     * @param  string  $text
-     * @param  string  $element
-     * @return Crawler
+     * @param  string $text
+     * @param  string $element
+     * @return $this
      */
     public function type(string $text, string $element): self
     {
@@ -79,8 +78,8 @@ trait InteractsWithPage
     /**
      * Check a checkbox on the page.
      *
-     * @param  string  $element
-     * @return Crawler
+     * @param  string $element
+     * @return $this
      */
     public function check(string $element): self
     {
@@ -90,8 +89,8 @@ trait InteractsWithPage
     /**
      * Uncheck a checkbox on the page.
      *
-     * @param  string  $element
-     * @return Crawler
+     * @param  string $element
+     * @return $this
      */
     public function uncheck(string $element): self
     {
@@ -101,9 +100,9 @@ trait InteractsWithPage
     /**
      * Select an option from a drop-down.
      *
-     * @param  string  $option
-     * @param  string  $element
-     * @return Crawler
+     * @param  string $option
+     * @param  string $element
+     * @return $this
      */
     public function select(string $option, string $element): self
     {
@@ -113,8 +112,8 @@ trait InteractsWithPage
     /**
      * Submit a form using the button with the given text value.
      *
-     * @param  string  $buttonText
-     * @return Crawler
+     * @param  string $buttonText
+     * @return $this
      */
     public function press(string $buttonText): self
     {
