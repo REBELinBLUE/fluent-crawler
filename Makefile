@@ -15,31 +15,31 @@ install:
 ## Run PHP unit tests
 phpunit:
 	@echo "${GREEN}Unit tests${RESET}"
-	@php vendor/bin/phpunit
+	@php bin/phpunit
 
 ## Run PHP mess detector
 phpmd:
 	@echo "${GREEN}PHP Mess Detector${RESET}"
-	@php vendor/bin/phpmd src/ text cleancode,codesize,naming,design,controversial,unusedcode
+	@php bin/phpmd src/ text cleancode,codesize,naming,design,controversial,unusedcode
 
 ## Run PHP code sniffer
 phpcs:
 	@echo "${GREEN}PHP Code Sniffer${RESET}"
-	@php vendor/bin/phpcs -p --standard=psr2 --colors src/
+	@php bin/phpcs -p --standard=psr2 --colors src/
 
 ## Run PHPStan
 phpstan:
 	@echo "${GREEN}PHPStan${RESET}"
-	@php vendor/bin/phpstan analyse -l 0 src/
+	@php bin/phpstan analyse -l 0 src/
 
 ## PHP Parallel Lint
 lint:
 	@echo "${GREEN}PHP Parallel Lint${RESET}"
-	@php vendor/bin/parallel-lint src/ tests/
+	@php bin/parallel-lint src/ tests/
 
 ## Fix PHP syntax with code sniffer
 fix:
-	@php vendor/bin/php-cs-fixer --no-interaction fix
+	@php bin/php-cs-fixer --no-interaction fix
 
 ## Generate the public API docs
 docs:
@@ -48,7 +48,7 @@ docs:
 ## Test Coverage HTML
 coverage:
 	@echo "${GREEN}Tests with coverage${RESET}"
-	@phpdbg -qrr vendor/bin/phpunit --coverage-html build/ --coverage-clover coverage.xml
+	@phpdbg -qrr bin/phpunit --coverage-html build/ --coverage-clover coverage.xml
 
 ## Prints this help
 help:
