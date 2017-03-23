@@ -43,17 +43,6 @@ class Crawler
     }
 
     /**
-     * Visit the given URI with a GET request.
-     *
-     * @param  string  $uri
-     * @return Crawler
-     */
-    public function visit(string $uri): self
-    {
-        return $this->makeRequest('GET', $uri);
-    }
-
-    /**
      * Get the HTTP client instance.
      *
      * @return Client
@@ -65,17 +54,6 @@ class Crawler
         }
 
         return $this->client;
-    }
-
-    protected function makeRequest(string $method, string $uri, array $parameters = []): self
-    {
-        $this->resetPageContext();
-
-        $this->crawler = $this->getClient()->request($method, $uri, $parameters);
-
-        $this->clearInputs();
-
-        return $this;
     }
 
     protected function makeRequestUsingForm(Form $form): self
