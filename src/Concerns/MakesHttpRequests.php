@@ -4,10 +4,6 @@ namespace REBELinBLUE\Crawler\Concerns;
 
 use REBELinBLUE\Crawler\Crawler;
 
-/**
- * @todo Add get cookies
- * @todo Add get headers
- */
 trait MakesHttpRequests
 {
     /**
