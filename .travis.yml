@@ -9,11 +9,6 @@ cache:
   directories:
     - $TRAVIS_BUILD_DIR/vendor
 
-addons:
-  code_climate:
-    repo_token: $CODECLIMATE_REPO_TOKEN
-    coverage_report: $TRAVIS_BUILD_DIR/coverage.xml
-
 before_install:
   - phpenv config-rm xdebug.ini
 
@@ -31,6 +26,7 @@ script:
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+  - php bin/test-reporter upload --coverage-report=$TRAVIS_BUILD_DIR/coverage.xml
 
 notifications:
   email: false
