@@ -13,8 +13,6 @@ use Symfony\Component\DomCrawler\Form;
 
 /**
  * A fluent interface to Symfony Crawler using Goutte.
- *
- * @todo: Add the ability to get an element
  */
 class Crawler
 {

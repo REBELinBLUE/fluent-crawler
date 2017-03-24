@@ -4,15 +4,19 @@ namespace REBELinBLUE\Crawler\Concerns;
 
 use REBELinBLUE\Crawler\Crawler;
 
+/**
+ * @todo Add get cookies
+ * @todo Add get headers
+ */
 trait MakesHttpRequests
 {
     /**
      * Visit the given URI with a GET request.
      *
-     * @param  string $uri
-     * @return $this
+     * @param  string  $uri
+     * @return Crawler
      */
-    public function visit(string $uri): self
+    public function visit(string $uri): Crawler
     {
         return $this->get($uri);
     }
@@ -24,7 +28,7 @@ trait MakesHttpRequests
      * @param  array   $headers
      * @return Crawler
      */
-    public function get(string $uri, array $headers = []): self
+    public function get(string $uri, array $headers = []): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
@@ -34,12 +38,12 @@ trait MakesHttpRequests
     /**
      * Visit the given URI with a POST request.
      *
-     * @param  string $uri
-     * @param  array  $parameters
-     * @param  array  $headers
-     * @return $this
+     * @param  string  $uri
+     * @param  array   $parameters
+     * @param  array   $headers
+     * @return Crawler
      */
-    public function post(string $uri, array $parameters = [], array $headers = []): self
+    public function post(string $uri, array $parameters = [], array $headers = []): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
@@ -49,12 +53,12 @@ trait MakesHttpRequests
     /**
      * Visit the given URI with a PUT request.
      *
-     * @param  string $uri
-     * @param  array  $parameters
-     * @param  array  $headers
-     * @return $this
+     * @param  string  $uri
+     * @param  array   $parameters
+     * @param  array   $headers
+     * @return Crawler
      */
-    public function put(string $uri, array $parameters = [], array $headers = []): self
+    public function put(string $uri, array $parameters = [], array $headers = []): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
@@ -64,12 +68,12 @@ trait MakesHttpRequests
     /**
      * Visit the given URI with a PATCH request.
      *
-     * @param  string $uri
-     * @param  array  $parameters
-     * @param  array  $headers
-     * @return $this
+     * @param  string  $uri
+     * @param  array   $parameters
+     * @param  array   $headers
+     * @return Crawler
      */
-    public function patch(string $uri, array $parameters = [], array $headers = []): self
+    public function patch(string $uri, array $parameters = [], array $headers = []): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
@@ -79,12 +83,12 @@ trait MakesHttpRequests
     /**
      * Visit the given URI with a DELETE request.
      *
-     * @param  string $uri
-     * @param  array  $parameters
-     * @param  array  $headers
-     * @return $this
+     * @param  string  $uri
+     * @param  array   $parameters
+     * @param  array   $headers
+     * @return Crawler
      */
-    public function delete(string $uri, array $parameters = [], array $headers = []): self
+    public function delete(string $uri, array $parameters = [], array $headers = []): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
@@ -97,7 +101,7 @@ trait MakesHttpRequests
         array $parameters = [],
         array $headers = [],
         ?string $body = null
-    ): self {
+    ): Crawler {
         $this->resetPageContext();
 
         $this->crawler = $this->getClient()->request($method, $uri, $parameters, [], $headers, $body);

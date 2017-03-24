@@ -51,10 +51,14 @@ abstract class CrawlerTestAssertions extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * @param GuzzleResponse[] $responses
+     * @param GuzzleResponse|GuzzleResponse[] $responses
      */
-    protected function mockResponses(array $responses)
+    protected function mockResponses($responses)
     {
+        if (!is_array($responses)) {
+            $responses = [$responses];
+        }
+
         $this->client->setClient($this->getGuzzle($responses));
     }
 

@@ -4,6 +4,7 @@ namespace REBELinBLUE\Crawler\Concerns;
 
 use Closure;
 use InvalidArgumentException;
+use REBELinBLUE\Crawler\Crawler;
 
 trait InteractsWithPage
 {
@@ -12,9 +13,9 @@ trait InteractsWithPage
      *
      * @param  string  $element
      * @param  Closure $callback
-     * @return $this
+     * @return Crawler
      */
-    public function within(string $element, Closure $callback): self
+    public function within(string $element, Closure $callback): Crawler
     {
         $this->subCrawlers[] = $this->crawler()->filter($element);
 
@@ -30,9 +31,9 @@ trait InteractsWithPage
      *
      * @param  string  $element
      * @param  Closure $callback
-     * @return $this
+     * @return Crawler
      */
-    public function filter(string $element, Closure $callback): self
+    public function filter(string $element, Closure $callback): Crawler
     {
         $crawler = $this->crawler()->filter($element);
 
@@ -46,9 +47,9 @@ trait InteractsWithPage
      *
      * @param  string|array $buttonText
      * @param  array|null   $inputs
-     * @return $this
+     * @return Crawler
      */
-    public function submitForm($buttonText, ?array $inputs = []): self
+    public function submitForm($buttonText, ?array $inputs = []): Crawler
     {
         return $this->makeRequestUsingForm($this->fillForm($buttonText, $inputs));
     }
@@ -58,9 +59,9 @@ trait InteractsWithPage
      *
      * @param  string                   $name
      * @throws InvalidArgumentException
-     * @return $this
+     * @return Crawler
      */
-    public function click(string $name): self
+    public function click(string $name): Crawler
     {
         $link = $this->crawler()->selectLink($name);
 
@@ -82,11 +83,11 @@ trait InteractsWithPage
     /**
      * Fill an input field with the given text.
      *
-     * @param  string $text
-     * @param  string $element
-     * @return $this
+     * @param  string  $text
+     * @param  string  $element
+     * @return Crawler
      */
-    public function type(string $text, string $element): self
+    public function type(string $text, string $element): Crawler
     {
         return $this->storeInput($element, $text);
     }
@@ -94,10 +95,10 @@ trait InteractsWithPage
     /**
      * Check a checkbox on the page.
      *
-     * @param  string $element
-     * @return $this
+     * @param  string  $element
+     * @return Crawler
      */
-    public function check(string $element): self
+    public function check(string $element): Crawler
     {
         return $this->storeInput($element, true);
     }
@@ -105,10 +106,10 @@ trait InteractsWithPage
     /**
      * Uncheck a checkbox on the page.
      *
-     * @param  string $element
-     * @return $this
+     * @param  string  $element
+     * @return Crawler
      */
-    public function uncheck(string $element): self
+    public function uncheck(string $element): Crawler
     {
         return $this->storeInput($element, false);
     }
@@ -116,11 +117,11 @@ trait InteractsWithPage
     /**
      * Select an option from a drop-down.
      *
-     * @param  string $option
-     * @param  string $element
-     * @return $this
+     * @param  string  $option
+     * @param  string  $element
+     * @return Crawler
      */
-    public function select(string $option, string $element): self
+    public function select(string $option, string $element): Crawler
     {
         return $this->storeInput($element, $option);
     }
@@ -128,10 +129,10 @@ trait InteractsWithPage
     /**
      * Submit a form using the button with the given text value.
      *
-     * @param  string $buttonText
-     * @return $this
+     * @param  string  $buttonText
+     * @return Crawler
      */
-    public function press(string $buttonText): self
+    public function press(string $buttonText): Crawler
     {
         return $this->submitForm($buttonText, $this->inputs);
     }

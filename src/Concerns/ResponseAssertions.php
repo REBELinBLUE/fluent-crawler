@@ -32,18 +32,16 @@ trait ResponseAssertions
      * @param  mixed  $value
      * @return bool
      */
-    protected function hasHeader(string $headerName, ?string $value = null): bool
+    public function hasHeader(string $headerName, ?string $value = null): bool
     {
-        //        $headers = $this->response->headers;
-//        $this->assertTrue($headers->has($headerName), "Header [{$headerName}] not present on response.");
-//        if (! is_null($value)) {
-//            $this->assertEquals(
-//                $headers->get($headerName),
-//                $value,
-//                "Header [{$headerName}] was found, but value [{$headers->get($headerName)}]
-//                  "does not match [{$value}]."
-//            );
-//        }
+        /** @var \Goutte\Client $client */
+        $client = $this->getClient();
+
+        $header = $client->getInternalResponse()->getHeader($headerName, true);
+
+        if ($header) {
+            return is_null($value) ? true : ($header === $value);
+        }
 
         return false;
     }
@@ -53,30 +51,21 @@ trait ResponseAssertions
      *
      * @param  string $cookieName
      * @param  mixed  $value
-     * @return $this
+     * @return bool
      */
-    protected function seeCookie(string $cookieName, ?string $value = null): bool
+    public function hasCookie(string $cookieName, ?string $value = null): bool
     {
-        //        $headers = $this->response->headers;
-//        $exist = false;
-//        foreach ($headers->getCookies() as $cookie) {
-//            if ($cookie->getName() === $cookieName) {
-//                $exist = true;
-//                break;
-//            }
-//        }
-//        $this->assertTrue($exist, "Cookie [{$cookieName}] not present on response.");
-//        if (! $exist || is_null($value)) {
-//            return $this;
-//        }
-//        $cookieValue = $cookie->getValue();
-//        $actual = $cookieValue;
-//        $this->assertEquals(
-//            $actual,
-//            $value,
-//            "Cookie [{$cookieName}] was found, but value [{$actual}] does not match [{$value}]."
-//        );
-//        return $this;
+        /** @var \Goutte\Client $client */
+        $client = $this->getClient();
+
+        $uri = $client->getRequest()->getUri();
+
+        $cookies = $client->getCookieJar()->allValues($uri);
+
+        if (isset($cookies[$cookieName])) {
+            return is_null($value) ? true : ($cookies[$cookieName] === $value);
+        }
+
         return false;
     }
 }

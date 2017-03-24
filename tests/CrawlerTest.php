@@ -37,17 +37,4 @@ class CrawlerTest extends CrawlerTestAssertions
         // Assert
         $this->assertSame($this->client, $this->crawler->getClient());
     }
-
-    public function test_it_can_visit_url()
-    {
-        // Arrange
-        $expected = $this->getFile('welcome.html');
-        $this->mockResponse($expected);
-
-        // Act
-        $crawler = $this->crawler->visit('http://www.example.com');
-
-        // Assert
-        $this->assertResponseMatches($crawler, $expected);
-    }
 }
