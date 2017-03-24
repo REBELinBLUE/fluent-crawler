@@ -9,6 +9,11 @@ cache:
   directories:
     - $TRAVIS_BUILD_DIR/vendor
 
+addons:
+  code_climate:
+    repo_token: $CODECLIMATE_REPO_TOKEN
+    coverage_report: $TRAVIS_BUILD_DIR/coverage.xml
+
 before_install:
   - phpenv config-rm xdebug.ini
 
@@ -29,7 +34,4 @@ after_success:
 
 notifications:
   email: false
-  
-addons:
-  code_climate:
-    repo_token: 9b4ab3158d2fd31a0099ad730783ce9589ad942d080362b130f62bfccc0cabaf
+
