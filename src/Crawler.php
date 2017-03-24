@@ -5,6 +5,7 @@ namespace REBELinBLUE\Crawler;
 use Goutte\Client;
 use InvalidArgumentException;
 use REBELinBLUE\Crawler\Concerns\InteractsWithPage;
+use REBELinBLUE\Crawler\Concerns\InteractsWithResponse;
 use REBELinBLUE\Crawler\Concerns\MakesHttpRequests;
 use REBELinBLUE\Crawler\Concerns\PageAssertions;
 use REBELinBLUE\Crawler\Concerns\ResponseAssertions;
@@ -17,7 +18,8 @@ use Symfony\Component\DomCrawler\Form;
 class Crawler
 {
     use PageAssertions, InteractsWithPage,
-        ResponseAssertions, MakesHttpRequests;
+        ResponseAssertions, InteractsWithResponse,
+        MakesHttpRequests;
 
     /** @var DomCrawler */
     protected $crawler;

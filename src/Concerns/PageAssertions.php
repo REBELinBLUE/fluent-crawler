@@ -12,7 +12,6 @@ use REBELinBLUE\Crawler\Constraints\IsChecked;
 use REBELinBLUE\Crawler\Constraints\IsSelected;
 use REBELinBLUE\Crawler\Constraints\PageConstraint;
 use REBELinBLUE\Crawler\Constraints\ReversePageConstraint;
-use Symfony\Component\BrowserKit\Response;
 
 trait PageAssertions
 {
@@ -200,16 +199,6 @@ trait PageAssertions
     public function dontSeeIsChecked($selector): bool
     {
         return $this->assertNotInPage(new IsChecked($selector));
-    }
-
-    /**
-     * Get the response object instance for the most recent request.
-     *
-     * @return Response
-     */
-    public function getResponse(): Response
-    {
-        return $this->getClient()->getResponse();
     }
 
     protected function assertInPage(PageConstraint $constraint): bool

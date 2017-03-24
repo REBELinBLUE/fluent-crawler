@@ -157,4 +157,18 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->hasCookie('baz', 'bar'));
         $this->assertFalse($crawler->hasCookie('foo', 'qux'));
     }
+
+    public function test_it_can_get_headers()
+    {
+        // Arrange
+        $headers  = ['E-Tag' => 'an-etag-hash'];
+        $response = new GuzzleResponse(200, $headers, $this->getFile('welcome.html'));
+        $this->mockResponses($response);
+
+        // Act
+        $crawler = $this->crawler->visit('http://example.com');
+
+        // Assert
+        $this->assertSame(['E-Tag' => ['an-etag-hash']], $crawler->getHeaders());
+    }
 }

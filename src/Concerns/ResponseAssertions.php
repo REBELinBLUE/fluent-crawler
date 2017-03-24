@@ -22,7 +22,7 @@ trait ResponseAssertions
      */
     public function isStatusCode(int $code): bool
     {
-        return $this->getClient()->getResponse()->getStatus() === $code;
+        return $this->getResponse()->getStatus() === $code;
     }
 
     /**
@@ -34,10 +34,7 @@ trait ResponseAssertions
      */
     public function hasHeader(string $headerName, ?string $value = null): bool
     {
-        /** @var \Goutte\Client $client */
-        $client = $this->getClient();
-
-        $header = $client->getInternalResponse()->getHeader($headerName, true);
+        $header = $this->getHeader($headerName);
 
         if ($header) {
             return is_null($value) ? true : ($header === $value);
@@ -55,15 +52,10 @@ trait ResponseAssertions
      */
     public function hasCookie(string $cookieName, ?string $value = null): bool
     {
-        /** @var \Goutte\Client $client */
-        $client = $this->getClient();
+        $cookie = $this->getCookie($cookieName);
 
-        $uri = $client->getRequest()->getUri();
-
-        $cookies = $client->getCookieJar()->allValues($uri);
-
-        if (isset($cookies[$cookieName])) {
-            return is_null($value) ? true : ($cookies[$cookieName] === $value);
+        if ($cookie) {
+            return is_null($value) ? true : ($cookie === $value);
         }
 
         return false;
