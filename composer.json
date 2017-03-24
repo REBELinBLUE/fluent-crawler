@@ -21,7 +21,7 @@
         "mockery/mockery": "^0.9.9",
         "phpmd/phpmd": "^2.6",
         "phpstan/phpstan": "^0.6.4",
-        "phpunit/phpunit": "^5.6",
+        "phpunit/phpunit": "^5.7",
         "squizlabs/php_codesniffer": "^2.8"
     },
     "autoload": {
