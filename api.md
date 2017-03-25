@@ -20,7 +20,6 @@ $crawler->visit(string $url): self;
 ```
 
 **Making raw requests**
-
 Of course, it is not always desirable to load a page just so you can go to another, so you are able to make
 raw HTTP requests
 ```php
@@ -269,7 +268,7 @@ $crawler->getClient(): Client;
 
 ## Checking for desired responses
 
-As with the page, you can also test that the response contains expected value.
+As with the page, you can also test that the response contains expected values.
 
 You can check the status code
 
@@ -290,7 +289,7 @@ $crawler->hasHeader(string $headerName, ?string $value = null): bool;
 $crawler->hasCookie(string $cookieName, ?string $value = null): bool;
 ```
 
-Foe example
+For example
 
 ```php
 // Checks the E-Tag header exists
