@@ -103,7 +103,7 @@ So the previous example can be rewritten as the following
 
 ```php
 $crawler->type('username', 'admin')
-        ->type('password, 'password')
+        ->type('password', 'password')
         ->check('remember_me')
         ->press('Login');
 ```
