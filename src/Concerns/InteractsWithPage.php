@@ -61,16 +61,16 @@ trait InteractsWithPage
      * @throws InvalidArgumentException
      * @return Crawler
      */
-    public function click(string $name): Crawler
+    public function click(string $linkText): Crawler
     {
-        $link = $this->crawler()->selectLink($name);
+        $link = $this->crawler()->selectLink($linkText);
 
         if (!count($link)) {
-            $link = $this->filterByNameOrId($name, 'a');
+            $link = $this->filterByNameOrId($linkText, 'a');
 
             if (!count($link)) {
                 throw new InvalidArgumentException(
-                    "Could not find a link with a body, name, or ID attribute of [{$name}]."
+                    "Could not find a link with a body, name, or ID attribute of [{$linkText}]."
                 );
             }
         }

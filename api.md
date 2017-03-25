@@ -16,15 +16,15 @@ $crawler->visit('http://example.com');
 Of course, it is not always desirable to load a page just so you can go to another, so you are able to make
 raw HTTP requests
 ```php
-$crawler->get($url, $headers);
+$crawler->get(string $url, array $headers = []);
 
-$crawler->post($url, $parameters, $headers);
+$crawler->post(string $url, array $parameters = [], array $headers = []);
 
-$crawler->put($url, $parameters, $headers);
+$crawler->put(string $url, array $parameters = [], array $headers = []);
 
-$crawler->patch($url, $parameters, $headers);
+$crawler->patch(string $url, array $parameters = [], array $headers = []);
 
-$crawler->delete($url, $parameters, $headers);
+$crawler->delete(string $url, array $parameters = [], array $headers = []);
 ```
 
 The `$parameters` is an array of key/values for data to send, i.e. form fields.
@@ -41,6 +41,68 @@ $crawler->post('http://www.example.com/users/1', $parameters, $headers);
 
 ## Interacting with Pages
 
-The primary purpose of the library is to behave like a web
- 
+Once you have made a request you are then able to interact with the resulting page.
+
+Unless otherwise stated, the following methods will throw a `\InvalidArgumentException` if the desired
+element is not found on the current page.
+
+**Click a link**
+```php
+$crawler->click(string $linkText);
+```
+The `$linkText` can be the text of the link, or the `name` or `id` if of the tag. Clicking a link results in navigating
+to a new page.
+
+**Submit a form**
+```php
+$crawler->submitForm(string $buttonText, array $inputs);
+
+// Alternatively, if there is only 1 form the $buttonText can be omitted
+
+$crawler->submitForm(array $inputs);
+```
+The `$buttonText` can be the text of the submit button, or the `name` or `id` if of the tag. Submitting a form results
+in navigating to a new to a new page. The `$inputs` parameters is a key/value pair of the values, so, for example.
+
+```php
+$crawler->submitForm('Login', [
+    'username'    => 'admin',
+    'password'    => 'password',
+    'remember_me' => true,
+]);
+```
+
+**Populating a form**
+Along with populating and submitting the form in one call you are able to interact with each field separately.
+
+```php
+// Type into an input or textarea
+$crawler->type(string $value, string $element);
+
+// Select a checkbox
+$crawler->check(string $element);
+
+// Clear a checkbox
+$crawler->uncheck(string $element);
+
+// Select an option from a radio button or select field
+$crawler->select(string $value, string $element);
+
+// Press a submit button
+$crawler->press(string $buttonText);
+```
+
+So the previous example can be rewritten as the following
+
+```php
+$crawler->type('username', 'admin')
+        ->type('password, 'password')
+        ->check('remember_me')
+        ->press('Login');
+```
+
+TODO: Add within and filter
+
+### Checking for desired content
+
 ## Interacting with Responses
