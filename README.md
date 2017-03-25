@@ -63,6 +63,7 @@ if ($crawler->dontSeeText('Hello World')) {
 
 For a full list of the available actions see [api.md](api.md).
 
+### Customising the HTTP client settings
 If you wish to customize the instance of Goutte which is used (or more likely, the instance of Guzzle), you can
 inject your own instance when constructing the class. For example, you may want to increase Guzzle's timeout
 
