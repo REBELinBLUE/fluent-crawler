@@ -84,16 +84,16 @@ Along with populating and submitting the form in one call you are able to intera
 
 ```php
 // Type into an input or textarea
-$crawler->type(string $value, string $element);
+$crawler->type(string $value, string $name);
 
 // Select a checkbox
-$crawler->check(string $element);
+$crawler->check(string $name);
 
 // Clear a checkbox
-$crawler->uncheck(string $element);
+$crawler->uncheck(string $name);
 
 // Select an option from a radio button or select field
-$crawler->select(string $value, string $element);
+$crawler->select(string $value, string $name);
 
 // Press a submit button
 $crawler->press(string $buttonText);

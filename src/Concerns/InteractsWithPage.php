@@ -11,13 +11,13 @@ trait InteractsWithPage
     /**
      * Narrow the test content to a specific area of the page.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @param  Closure $callback
      * @return Crawler
      */
-    public function within(string $element, Closure $callback): Crawler
+    public function within(string $name, Closure $callback): Crawler
     {
-        $this->subCrawlers[] = $this->crawler()->filter($element);
+        $this->subCrawlers[] = $this->crawler()->filter($name);
 
         $callback();
 
@@ -29,13 +29,13 @@ trait InteractsWithPage
     /**
      * Filter the content to a specific area of the page and pass to the callback.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @param  Closure $callback
      * @return Crawler
      */
-    public function filter(string $element, Closure $callback): Crawler
+    public function filter(string $name, Closure $callback): Crawler
     {
-        $crawler = $this->crawler()->filter($element);
+        $crawler = $this->crawler()->filter($name);
 
         $callback($crawler);
 
@@ -84,46 +84,46 @@ trait InteractsWithPage
      * Fill an input field with the given text.
      *
      * @param  string  $text
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function type(string $text, string $element): Crawler
+    public function type(string $text, string $name): Crawler
     {
-        return $this->storeInput($element, $text);
+        return $this->storeInput($name, $text);
     }
 
     /**
      * Check a checkbox on the page.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function check(string $element): Crawler
+    public function check(string $name): Crawler
     {
-        return $this->storeInput($element, true);
+        return $this->storeInput($name, true);
     }
 
     /**
      * Uncheck a checkbox on the page.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function uncheck(string $element): Crawler
+    public function uncheck(string $name): Crawler
     {
-        return $this->storeInput($element, false);
+        return $this->storeInput($name, false);
     }
 
     /**
      * Select an option from a drop-down.
      *
      * @param  string  $option
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function select(string $option, string $element): Crawler
+    public function select(string $option, string $name): Crawler
     {
-        return $this->storeInput($element, $option);
+        return $this->storeInput($name, $option);
     }
 
     /**
