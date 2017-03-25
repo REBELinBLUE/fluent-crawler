@@ -80,7 +80,6 @@ $crawler = new Crawler($goutteClient);
 ```
 
 ## Further Reading
----------------------
 
 Fluent Crawler is a wrapper around the following PHP libraries.
 
