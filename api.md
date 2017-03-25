@@ -4,15 +4,22 @@ The web crawler has a fluent interface. It is designed to behave like a browser,
 HTTP requests directly, for example if you know the fields in a form you can make a `POST` request without having
 to load it first.
 
-## Requests
+- [Making requests](#making-requests)
+- [Interacting with Pages](#interacting-with-pages)
+- [Checking for desired content](#checking-for-desired-content)
+- [Interacting with responses](#interacting-with-responses)
+- [Checking for desired responses](#checking-for-desired-responses)
+
+## Making requests
 
 The primary method of making requests is with the `visit` method, this is as if a user has typed an address
 into their browser. From there on you then interact with the page to click link & submit forms to visit new pages.
 ```php
-$crawler->visit('http://example.com');
+$crawler->visit(string $url);
 ```
 
-### Making raw requests
+**Making raw requests**
+
 Of course, it is not always desirable to load a page just so you can go to another, so you are able to make
 raw HTTP requests
 ```php
@@ -103,6 +110,8 @@ $crawler->type('username', 'admin')
 
 TODO: Add within and filter
 
-### Checking for desired content
+## Checking for desired content
 
-## Interacting with Responses
+## Interacting with responses
+
+## Checking for desired responses
