@@ -8,6 +8,8 @@ A web scraping library for PHP with a nice fluent interface.
 
 A fork of [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing), repurposed to use with real HTTP requests.
 
+Developed for a project I am working on at Sainsbury's.
+
 ## Requirements
 
 PHP 7.1+ and Goutte 3.1+
