@@ -43,6 +43,20 @@ trait InteractsWithPage
     }
 
     /**
+     * Filter the content to a specific area of the page, pass to the callback and return the result.
+     *
+     * @param  string  $selector
+     * @param  Closure $callback
+     * @return mixed
+     */
+    public function extract(string $selector, Closure $callback)
+    {
+        $crawler = $this->crawler()->filter($selector);
+
+        return $callback($crawler);
+    }
+
+    /**
      * Submit a form on the page with the given input.
      *
      * @param  string|array $buttonText

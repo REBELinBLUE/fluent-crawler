@@ -232,6 +232,22 @@ $crawler->filter('ul#container', function (DomCrawler $dom) use (&$text) {
 });
 ```
 
+You can also filter and return the result of the callback (this however means you can not chain the calls).
+
+```php
+$crawler->extract(string $name, \Closure $callback);
+```
+
+The previous example can be rewritten as below
+
+```php
+$text = $crawler->extract('ul#container', function (DomCrawler $dom) {
+    return $dom->filter('li')->each(function (DomCrawler $node) {
+        return $node->text();
+    });
+});
+```
+
 Read the documentation of the [Symfony DomCrawler](https://symfony.com/doc/current/components/dom_crawler.html)
 component for more information about what you can do with this method.
 

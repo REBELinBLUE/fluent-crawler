@@ -7,7 +7,8 @@ use REBELinBLUE\Crawler\Tests\CrawlerTestAssertions;
 
 class PageAssertionsTest extends CrawlerTestAssertions
 {
-    public function test_it_sees_string_in_page()
+    /** @test */
+    public function it_sees_string_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -21,7 +22,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSee($expected));
     }
 
-    public function test_it_doesnt_see_string_in_page()
+    /** @test */
+    public function it_does_not_see_string_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -35,7 +37,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->see($notExpected));
     }
 
-    public function test_it_sees_text_in_page()
+    /** @test */
+    public function it_sees_text_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -49,7 +52,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeText($expected));
     }
 
-    public function test_it_doesnt_see_text_in_page()
+    /** @test */
+    public function it_does_not_see_text_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -63,7 +67,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeText($notExpected));
     }
 
-    public function test_it_sees_element_in_page()
+    /** @test */
+    public function it_sees_element_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -77,7 +82,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeElement($expected));
     }
 
-    public function test_it_sees_element_with_attribute_value_in_page()
+    /** @test */
+    public function it_sees_element_with_attribute_value_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -92,7 +98,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeElement($selector, $attributes));
     }
 
-    public function test_it_sees_element_with_attribute_in_page()
+    /** @test */
+    public function it_sees_element_with_attribute_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -107,7 +114,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeElement($selector, $attributes));
     }
 
-    public function test_it_doesnt_see_element_in_page()
+    /** @test */
+    public function it_does_not_see_element_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -121,7 +129,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeElement($notExpected));
     }
 
-    public function test_it_doesnt_see_element_with_attribute_value_in_page()
+    /** @test */
+    public function it_does_not_see_element_with_attribute_value_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -136,7 +145,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeElement($selector, $attributes));
     }
 
-    public function test_it_doesnt_see_element_with_attribute_in_page()
+    /** @test */
+    public function it_does_not_see_element_with_attribute_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -151,7 +161,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeElement($selector, $attributes));
     }
 
-    public function test_it_sees_string_in_element()
+    /** @test */
+    public function it_sees_string_in_element()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -166,7 +177,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeInElement($selector, $expected));
     }
 
-    public function test_it_doesnt_see_string_in_element()
+    /** @test */
+    public function it_does_not_see_string_in_element()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));
@@ -181,7 +193,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeInElement($selector, $notExpected));
     }
 
-    public function test_it_sees_link_with_text_in_page()
+    /** @test */
+    public function it_sees_link_with_text_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('link.html'));
@@ -195,7 +208,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeLink($expected));
     }
 
-    public function test_it_doesnt_see_link_with_text_in_page()
+    /** @test */
+    public function it_does_not_see_link_with_text_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('link.html'));
@@ -209,7 +223,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeLink($notExpected));
     }
 
-    public function test_it_sees_link_with_url_in_page()
+    /** @test */
+    public function it_sees_link_with_url_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('link.html'));
@@ -224,7 +239,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeLink($text, $expected));
     }
 
-    public function test_it_doesnt_sees_link_with_url_in_page()
+    /** @test */
+    public function it_does_not_sees_link_with_url_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('link.html'));
@@ -239,7 +255,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeLink($text, $notExpected));
     }
 
-    public function test_it_sees_field_with_value_in_page()
+    /** @test */
+    public function it_sees_field_with_value_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -254,7 +271,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeInField($field, $expected));
     }
 
-    public function test_it_doesnt_see_field_with_value_in_page()
+    /** @test */
+    public function it_does_not_see_field_with_value_in_page()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -269,7 +287,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeInField($field, $notExpected));
     }
 
-    public function test_it_sees_option_with_value_is_selected()
+    /** @test */
+    public function it_sees_option_with_value_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -284,7 +303,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
     }
 
-    public function test_it_sees_option_with_text_is_selected()
+    /** @test */
+    public function it_sees_option_with_text_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -299,7 +319,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
     }
 
-    public function test_it_sees_grouped_option_is_selected()
+    /** @test */
+    public function it_sees_grouped_option_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -314,7 +335,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_option_with_value_is_selected()
+    /** @test */
+    public function it_does_not_see_option_with_value_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -329,7 +351,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $notExpected));
     }
 
-    public function test_it_doesnt_see_option_with_text_is_selected()
+    /** @test */
+    public function it_does_not_see_option_with_text_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -344,7 +367,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_grouped_option_is_selected()
+    /** @test */
+    public function it_does_not_see_grouped_option_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -359,7 +383,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
-    public function test_it_sees_checkbox_is_checked()
+    /** @test */
+    public function it_sees_checkbox_is_checked()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -373,7 +398,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsChecked($expected));
     }
 
-    public function test_it_doesnt_see_checkbox_is_checked()
+    /** @test */
+    public function it_does_not_see_checkbox_is_checked()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -387,7 +413,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsChecked($expected));
     }
 
-    public function test_it_sees_radiobox_is_selected()
+    /** @test */
+    public function it_sees_radiobox_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -402,7 +429,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->dontSeeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_radiobox_is_selected()
+    /** @test */
+    public function it_does_not_see_radiobox_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -417,7 +445,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
-    public function test_it_doesnt_see_radiobox_is_selected_when_none_is_selected()
+    /** @test */
+    public function it_does_not_see_radiobox_is_selected_when_none_is_selected()
     {
         // Arrange
         $this->mockResponse($this->getFile('form.html'));
@@ -432,7 +461,8 @@ class PageAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->seeIsSelected($selector, $expected));
     }
 
-    public function test_it_throws_an_invalid_argument_exception_when_field_missing()
+    /** @test */
+    public function it_throws_an_invalid_argument_exception_when_field_missing()
     {
         // Assert
         $this->expectException(InvalidArgumentException::class);

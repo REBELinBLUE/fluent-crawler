@@ -7,7 +7,8 @@ use REBELinBLUE\Crawler\Tests\CrawlerTestAssertions;
 
 class ResponseAssertionsTest extends CrawlerTestAssertions
 {
-    public function test_it_sees_an_ok_status()
+    /** @test */
+    public function it_sees_an_ok_status()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'), 200);
@@ -19,7 +20,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->isOk());
     }
 
-    public function test_it_sees_a_value_status()
+    /** @test */
+    public function it_sees_a_value_status()
     {
         // Arrange
         $expected = 201;
@@ -32,7 +34,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->isStatusCode($expected));
     }
 
-    public function test_it_has_header()
+    /** @test */
+    public function it_has_header()
     {
         // Arrange
         $headers  = ['E-Tag' => 'an-etag-hash'];
@@ -46,7 +49,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->hasHeader('E-Tag'));
     }
 
-    public function test_it_doesnt_have_header()
+    /** @test */
+    public function it_does_not_have_header()
     {
         // Arrange
         $headers  = ['E-Tag' => 'an-etag-hash'];
@@ -60,7 +64,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->hasHeader('Cache-Control'));
     }
 
-    public function test_it_has_header_with_value()
+    /** @test */
+    public function it_has_header_with_value()
     {
         // Arrange
         $headers  = ['E-Tag' => 'an-etag-hash'];
@@ -74,7 +79,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->hasHeader('E-Tag', 'an-etag-hash'));
     }
 
-    public function test_it_doesnt_have_header_with_value()
+    /** @test */
+    public function it_does_not_have_header_with_value()
     {
         // Arrange
         $headers  = ['E-Tag' => 'an-etag-hash'];
@@ -89,7 +95,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->hasHeader('Cache-Control', 'an-etag-hash'));
     }
 
-    public function test_it_has_cookie()
+    /** @test */
+    public function it_has_cookie()
     {
         // Arrange
         $headers = [
@@ -106,7 +113,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->hasCookie('foo'));
     }
 
-    public function test_it_has_cookie_with_value()
+    /** @test */
+    public function it_has_cookie_with_value()
     {
         // Arrange
         $headers = [
@@ -123,7 +131,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertTrue($crawler->hasCookie('foo', 'bar'));
     }
 
-    public function test_it_doesnt_have_cookie()
+    /** @test */
+    public function it_does_not_have_cookie()
     {
         // Arrange
         $headers = [
@@ -140,7 +149,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->hasCookie('baz'));
     }
 
-    public function test_it_doesnt_have_cookie_with_value()
+    /** @test */
+    public function it_does_not_have_cookie_with_value()
     {
         // Arrange
         $headers = [
@@ -158,7 +168,8 @@ class ResponseAssertionsTest extends CrawlerTestAssertions
         $this->assertFalse($crawler->hasCookie('foo', 'qux'));
     }
 
-    public function test_it_can_get_headers()
+    /** @test */
+    public function it_can_get_headers()
     {
         // Arrange
         $headers  = ['E-Tag' => 'an-etag-hash'];

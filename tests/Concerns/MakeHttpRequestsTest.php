@@ -7,7 +7,8 @@ use Symfony\Component\BrowserKit\Request;
 
 class MakeHttpRequestsTest extends CrawlerTestAssertions
 {
-    public function test_it_can_visit_url()
+    /** @test */
+    public function it_can_visit_url()
     {
         // Arrange
         $expected = $this->mockPageResponse();
@@ -19,7 +20,8 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         $this->assertResponseMatches($crawler, $expected);
     }
 
-    public function test_it_can_make_get_requests()
+    /** @test */
+    public function it_can_make_get_requests()
     {
         // Arrange
         $expected = $this->mockPageResponse();
@@ -34,7 +36,8 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         $this->assertRequestMatches($request, [], 'GET');
     }
 
-    public function test_it_can_make_post_requests()
+    /** @test */
+    public function it_can_make_post_requests()
     {
         // Arrange
         $expected   = $this->mockPageResponse();
@@ -50,7 +53,8 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         $this->assertRequestMatches($request, $parameters, 'POST');
     }
 
-    public function test_it_can_make_put_requests()
+    /** @test */
+    public function it_can_make_put_requests()
     {
         // Arrange
         $expected   = $this->mockPageResponse();
@@ -66,7 +70,8 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         $this->assertRequestMatches($request, $parameters, 'PUT');
     }
 
-    public function test_it_can_make_patch_requests()
+    /** @test */
+    public function it_can_make_patch_requests()
     {
         // Arrange
         $expected   = $this->mockPageResponse();
@@ -82,7 +87,8 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         $this->assertRequestMatches($request, $parameters, 'PATCH');
     }
 
-    public function test_it_can_make_delete_requests()
+    /** @test */
+    public function it_can_make_delete_requests()
     {
         // Arrange
         $expected   = $this->mockPageResponse();
