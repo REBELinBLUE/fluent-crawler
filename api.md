@@ -33,7 +33,10 @@ The `$headers` is an array of key/values for additional headers to send.
 An example of making a `POST` request
 
 ```php
-$crawler->post('http://www.example.com', ['name' => 'admin'], ['If-Unmodified-Since' => 'Thu, 25 May 2017 18:45:31 GMT']);
+$parameters = ['name' => 'admin'];
+$headers    = ['If-Unmodified-Since' => 'Thu, 25 May 2017 18:45:31 GMT'];
+
+$crawler->post('http://www.example.com/users/1', $parameters, $headers);
 ```
 
 ## Interacting with Pages
