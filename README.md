@@ -78,3 +78,12 @@ $goutteClient->setClient($guzzleClient);
 
 $crawler = new Crawler($goutteClient);
 ```
+
+## Further Reading
+---------------------
+
+Fluent Crawler is a wrapper around the following PHP libraries.
+
+* [Goutte](https://github.com/FriendsOfPHP/Goutte) web scraper.
+* Symfony [BrowserKit](https://symfony.com/components/BrowserKit), [CssSelector](https://symfony.com/doc/current/components/css_selector.html) and [DomCrawler](https://symfony.com/doc/current/components/dom_crawler.html).
+* [Guzzle](http://docs.guzzlephp.org) HTTP client.

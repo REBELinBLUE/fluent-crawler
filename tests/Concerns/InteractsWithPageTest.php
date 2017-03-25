@@ -281,16 +281,22 @@ class InteractsWithPageTest extends CrawlerTestAssertions
 
     public function test_it_can_filter()
     {
-
         // Arrange
-        $this->mockResponse($this->getFile('welcome.html'));
+        $this->mockResponse($this->getFile('list.html'));
 
         // Act
-        $crawler = $this->crawler->visit('http://example.com')->filter('#container', function ($element) {
+        $values   = [];
+        $callback = function (Crawler $element) use (&$values) {
             $this->assertInstanceOf(Crawler::class, $element);
-        });
+            $values = $element->filter('li')->each(function (Crawler $node) {
+                return trim($node->text());
+            });
+        };
+
+        $crawler = $this->crawler->visit('http://example.com')->filter('ul#container', $callback);
 
         // Assert
         $this->assertIsCrawler($crawler);
+        $this->assertSame(['Foo', 'Bar', 'Baz', 'Qux'], $values);
     }
 }

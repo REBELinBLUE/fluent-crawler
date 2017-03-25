@@ -11,13 +11,13 @@ trait InteractsWithPage
     /**
      * Narrow the test content to a specific area of the page.
      *
-     * @param  string  $name
+     * @param  string  $selector
      * @param  Closure $callback
      * @return Crawler
      */
-    public function within(string $name, Closure $callback): Crawler
+    public function within(string $selector, Closure $callback): Crawler
     {
-        $this->subCrawlers[] = $this->crawler()->filter($name);
+        $this->subCrawlers[] = $this->crawler()->filter($selector);
 
         $callback();
 
@@ -29,13 +29,13 @@ trait InteractsWithPage
     /**
      * Filter the content to a specific area of the page and pass to the callback.
      *
-     * @param  string  $name
+     * @param  string  $selector
      * @param  Closure $callback
      * @return Crawler
      */
-    public function filter(string $name, Closure $callback): Crawler
+    public function filter(string $selector, Closure $callback): Crawler
     {
-        $crawler = $this->crawler()->filter($name);
+        $crawler = $this->crawler()->filter($selector);
 
         $callback($crawler);
 

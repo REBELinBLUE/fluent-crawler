@@ -135,12 +135,12 @@ trait PageAssertions
      * Check that an input field contains the given value.
      *
      * @param  string $selector
-     * @param  string $expected
+     * @param  string $value
      * @return mixed
      */
-    public function seeInField(string $selector, string $expected)
+    public function seeInField(string $selector, string $value)
     {
-        return $this->assertInPage(new HasValue($selector, $expected));
+        return $this->assertInPage(new HasValue($selector, $value));
     }
 
     /**

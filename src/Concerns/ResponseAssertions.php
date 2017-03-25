@@ -17,12 +17,12 @@ trait ResponseAssertions
     /**
      * Check that the client response has a given code.
      *
-     * @param  int  $code
+     * @param  int  $statusCode
      * @return bool
      */
-    public function isStatusCode(int $code): bool
+    public function isStatusCode(int $statusCode): bool
     {
-        return $this->getResponse()->getStatus() === $code;
+        return $this->getResponse()->getStatus() === $statusCode;
     }
 
     /**
