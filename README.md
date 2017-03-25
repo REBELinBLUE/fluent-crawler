@@ -24,7 +24,7 @@ composer require fluent-web-crawler
 
 ## Usage
 
-Create an instance of the Crawler
+**Create an instance of the Crawler**
 
 ```php
 use REBELinBLUE\Crawler;
@@ -32,13 +32,13 @@ use REBELinBLUE\Crawler;
 $crawler = new Crawler();
 ```
 
-Visit a URL
+**Visit a URL**
 
 ```php
 $crawler->visit('http://www.example.com');
 ```
 
-Interact with the response 
+**Interact with the page**
 
 ```php
 $crawler->type('username', 'admin')
@@ -54,7 +54,7 @@ $crawler->submitForm('Login', [
 
 ```
 
-or assert the response is as expected
+**Check the response is as expected**
 ```php
 if ($crawler->dontSeeText('Hello World')) {
     throw new \Exception('The page does not contain the expected text');
