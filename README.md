@@ -8,6 +8,8 @@ A web scraping library for PHP with a nice fluent interface.
 
 A fork of [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing), repurposed to use with real HTTP requests.
 
+Developed for a project I am working on at Sainsbury's.
+
 ## Requirements
 
 PHP 7.1+ and Goutte 3.1+
@@ -24,7 +26,7 @@ composer require fluent-web-crawler
 
 ## Usage
 
-Create an instance of the Crawler
+**Create an instance of the Crawler**
 
 ```php
 use REBELinBLUE\Crawler;
@@ -32,13 +34,13 @@ use REBELinBLUE\Crawler;
 $crawler = new Crawler();
 ```
 
-Visit a URL
+**Visit a URL**
 
 ```php
 $crawler->visit('http://www.example.com');
 ```
 
-Interact with the response 
+**Interact with the page**
 
 ```php
 $crawler->type('username', 'admin')
@@ -54,7 +56,7 @@ $crawler->submitForm('Login', [
 
 ```
 
-or assert the response is as expected
+**Check the response is as expected**
 ```php
 if ($crawler->dontSeeText('Hello World')) {
     throw new \Exception('The page does not contain the expected text');
@@ -63,6 +65,7 @@ if ($crawler->dontSeeText('Hello World')) {
 
 For a full list of the available actions see [api.md](api.md).
 
+### Customising the HTTP client settings
 If you wish to customize the instance of Goutte which is used (or more likely, the instance of Guzzle), you can
 inject your own instance when constructing the class. For example, you may want to increase Guzzle's timeout
 
@@ -80,7 +83,6 @@ $crawler = new Crawler($goutteClient);
 ```
 
 ## Further Reading
----------------------
 
 Fluent Crawler is a wrapper around the following PHP libraries.
 
