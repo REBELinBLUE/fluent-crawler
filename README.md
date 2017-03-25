@@ -1,11 +1,10 @@
 # Fluent Web Crawler
-
-A web scraping library for PHP with a nice fluent interface.
-
 [![StyleCI](https://styleci.io/repos/85713671/shield?style=flat-square&branch=master)](https://styleci.io/repos/85713671)
 [![Build Status](https://img.shields.io/travis/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://travis-ci.org/REBELinBLUE/fluent-crawler)
 [![Code Climate](https://img.shields.io/codeclimate/github/REBELinBLUE/fluent-crawler.svg?style=flat-square)](https://codeclimate.com/github/REBELinBLUE/fluent-crawler)
 [![Code Coverage](https://img.shields.io/codecov/c/github/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://codecov.io/gh/REBELinBLUE/fluent-crawler)
+
+A web scraping library for PHP with a nice fluent interface.
 
 A fork of [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing), repurposed to use with real HTTP requests.
 
@@ -64,8 +63,8 @@ if ($crawler->dontSeeText('Hello World')) {
 
 For a full list of the available actions see [api.md](http://github.com/REBELinBLUE/fluent-crawler/blob/master/api.md).
 
-If you wish to customize the instance of Goutte which is used (or more likely, for Guzzle), you can inject your 
-own instance when constructing the class. For example, you may want to increase Guzzle's timeout
+If you wish to customize the instance of Goutte which is used (or more likely, the instance of Guzzle), you can
+inject your own instance when constructing the class. For example, you may want to increase Guzzle's timeout
 
 ```php
 use Goutte\Client as GoutteClient;
