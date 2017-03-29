@@ -34,61 +34,65 @@ trait MakesHttpRequests
     /**
      * Visit the given URI with a POST request.
      *
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $headers
+     * @param  string      $uri
+     * @param  array       $parameters
+     * @param  array       $headers
+     * @param  null|string $body
      * @return Crawler
      */
-    public function post(string $uri, array $parameters = [], array $headers = []): Crawler
+    public function post(string $uri, array $parameters = [], array $headers = [], ?string $body = null): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
-        return $this->makeRequest('POST', $uri, $parameters, $server);
+        return $this->makeRequest('POST', $uri, $parameters, $server, $body);
     }
 
     /**
      * Visit the given URI with a PUT request.
      *
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $headers
+     * @param  string      $uri
+     * @param  array       $parameters
+     * @param  array       $headers
+     * @param  null|string $body
      * @return Crawler
      */
-    public function put(string $uri, array $parameters = [], array $headers = []): Crawler
+    public function put(string $uri, array $parameters = [], array $headers = [], ?string $body = null): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
-        return $this->makeRequest('PUT', $uri, $parameters, $server);
+        return $this->makeRequest('PUT', $uri, $parameters, $server, $body);
     }
 
     /**
      * Visit the given URI with a PATCH request.
      *
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $headers
+     * @param  string      $uri
+     * @param  array       $parameters
+     * @param  array       $headers
+     * @param  null|string $body
      * @return Crawler
      */
-    public function patch(string $uri, array $parameters = [], array $headers = []): Crawler
+    public function patch(string $uri, array $parameters = [], array $headers = [], ?string $body = null): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
-        return $this->makeRequest('PATCH', $uri, $parameters, $server);
+        return $this->makeRequest('PATCH', $uri, $parameters, $server, $body);
     }
 
     /**
      * Visit the given URI with a DELETE request.
      *
-     * @param  string  $uri
-     * @param  array   $parameters
-     * @param  array   $headers
+     * @param  string      $uri
+     * @param  array       $parameters
+     * @param  array       $headers
+     * @param  null|string $body
      * @return Crawler
      */
-    public function delete(string $uri, array $parameters = [], array $headers = []): Crawler
+    public function delete(string $uri, array $parameters = [], array $headers = [], ?string $body = null): Crawler
     {
         $server = $this->transformHeadersToServerVars($headers);
 
-        return $this->makeRequest('DELETE', $uri, $parameters, $server);
+        return $this->makeRequest('DELETE', $uri, $parameters, $server, $body);
     }
 
     protected function makeRequest(
