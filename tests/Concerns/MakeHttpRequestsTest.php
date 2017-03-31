@@ -40,68 +40,72 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
     public function it_can_make_post_requests()
     {
         // Arrange
-        $expected   = $this->mockPageResponse();
-        $headers    = $this->expectedHeaders();
-        $parameters = ['foo' => 'bar'];
+        $expected      = $this->mockPageResponse();
+        $headers       = $this->expectedHeaders();
+        $parameters    = ['foo' => 'bar'];
+        $content       = 'baz=qux';
 
         // Act
-        $crawler = $this->crawler->post('http://www.example.com', $parameters, $headers);
+        $crawler = $this->crawler->post('http://www.example.com', $parameters, $headers, $content);
         $request = $crawler->getClient()->getHistory()->current();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
-        $this->assertRequestMatches($request, $parameters, 'POST');
+        $this->assertRequestMatches($request, $parameters, 'POST', $content);
     }
 
     /** @test */
     public function it_can_make_put_requests()
     {
         // Arrange
-        $expected   = $this->mockPageResponse();
-        $headers    = $this->expectedHeaders();
-        $parameters = ['foo' => 'bar'];
+        $expected      = $this->mockPageResponse();
+        $headers       = $this->expectedHeaders();
+        $parameters    = ['foo' => 'bar'];
+        $content       = 'baz=qux';
 
         // Act
-        $crawler = $this->crawler->put('http://www.example.com', $parameters, $headers);
+        $crawler = $this->crawler->put('http://www.example.com', $parameters, $headers, $content);
         $request = $crawler->getClient()->getHistory()->current();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
-        $this->assertRequestMatches($request, $parameters, 'PUT');
+        $this->assertRequestMatches($request, $parameters, 'PUT', $content);
     }
 
     /** @test */
     public function it_can_make_patch_requests()
     {
         // Arrange
-        $expected   = $this->mockPageResponse();
-        $headers    = $this->expectedHeaders();
-        $parameters = ['foo' => 'bar'];
+        $expected      = $this->mockPageResponse();
+        $headers       = $this->expectedHeaders();
+        $parameters    = ['foo' => 'bar'];
+        $content       = 'baz=qux';
 
         // Act
-        $crawler = $this->crawler->patch('http://www.example.com', $parameters, $headers);
+        $crawler = $this->crawler->patch('http://www.example.com', $parameters, $headers, $content);
         $request = $crawler->getClient()->getHistory()->current();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
-        $this->assertRequestMatches($request, $parameters, 'PATCH');
+        $this->assertRequestMatches($request, $parameters, 'PATCH', $content);
     }
 
     /** @test */
     public function it_can_make_delete_requests()
     {
         // Arrange
-        $expected   = $this->mockPageResponse();
-        $headers    = $this->expectedHeaders();
-        $parameters = ['foo' => 'bar'];
+        $expected      = $this->mockPageResponse();
+        $headers       = $this->expectedHeaders();
+        $parameters    = ['foo' => 'bar'];
+        $content       = 'baz=qux';
 
         // Act
-        $crawler = $this->crawler->delete('http://www.example.com', $parameters, $headers);
+        $crawler = $this->crawler->delete('http://www.example.com', $parameters, $headers, $content);
         $request = $crawler->getClient()->getHistory()->current();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
-        $this->assertRequestMatches($request, $parameters, 'DELETE');
+        $this->assertRequestMatches($request, $parameters, 'DELETE', $content);
     }
 
     private function mockPageResponse()
@@ -113,7 +117,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
         return $expected;
     }
 
-    private function assertRequestMatches(Request $request, array $parameters, string $method)
+    private function assertRequestMatches(Request $request, array $parameters, string $method, string $content = null)
     {
         $server = $request->getServer();
 
@@ -122,6 +126,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         $this->assertSame($method, $request->getMethod());
         $this->assertSame($parameters, $request->getParameters());
+        $this->assertSame($content, $request->getContent());
     }
 
     private function expectedHeaders()
