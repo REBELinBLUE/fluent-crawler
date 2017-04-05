@@ -11,13 +11,13 @@ trait InteractsWithPage
     /**
      * Narrow the test content to a specific area of the page.
      *
-     * @param  string  $element
+     * @param  string  $selector
      * @param  Closure $callback
      * @return Crawler
      */
-    public function within(string $element, Closure $callback): Crawler
+    public function within(string $selector, Closure $callback): Crawler
     {
-        $this->subCrawlers[] = $this->crawler()->filter($element);
+        $this->subCrawlers[] = $this->crawler()->filter($selector);
 
         $callback();
 
@@ -29,17 +29,31 @@ trait InteractsWithPage
     /**
      * Filter the content to a specific area of the page and pass to the callback.
      *
-     * @param  string  $element
+     * @param  string  $selector
      * @param  Closure $callback
      * @return Crawler
      */
-    public function filter(string $element, Closure $callback): Crawler
+    public function filter(string $selector, Closure $callback): Crawler
     {
-        $crawler = $this->crawler()->filter($element);
+        $crawler = $this->crawler()->filter($selector);
 
         $callback($crawler);
 
         return $this;
+    }
+
+    /**
+     * Filter the content to a specific area of the page, pass to the callback and return the result.
+     *
+     * @param  string  $selector
+     * @param  Closure $callback
+     * @return mixed
+     */
+    public function extract(string $selector, Closure $callback)
+    {
+        $crawler = $this->crawler()->filter($selector);
+
+        return $callback($crawler);
     }
 
     /**
@@ -61,16 +75,16 @@ trait InteractsWithPage
      * @throws InvalidArgumentException
      * @return Crawler
      */
-    public function click(string $name): Crawler
+    public function click(string $linkText): Crawler
     {
-        $link = $this->crawler()->selectLink($name);
+        $link = $this->crawler()->selectLink($linkText);
 
         if (!count($link)) {
-            $link = $this->filterByNameOrId($name, 'a');
+            $link = $this->filterByNameOrId($linkText, 'a');
 
             if (!count($link)) {
                 throw new InvalidArgumentException(
-                    "Could not find a link with a body, name, or ID attribute of [{$name}]."
+                    "Could not find a link with a body, name, or ID attribute of [{$linkText}]."
                 );
             }
         }
@@ -84,46 +98,46 @@ trait InteractsWithPage
      * Fill an input field with the given text.
      *
      * @param  string  $text
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function type(string $text, string $element): Crawler
+    public function type(string $text, string $name): Crawler
     {
-        return $this->storeInput($element, $text);
+        return $this->storeInput($name, $text);
     }
 
     /**
      * Check a checkbox on the page.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function check(string $element): Crawler
+    public function check(string $name): Crawler
     {
-        return $this->storeInput($element, true);
+        return $this->storeInput($name, true);
     }
 
     /**
      * Uncheck a checkbox on the page.
      *
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function uncheck(string $element): Crawler
+    public function uncheck(string $name): Crawler
     {
-        return $this->storeInput($element, false);
+        return $this->storeInput($name, false);
     }
 
     /**
      * Select an option from a drop-down.
      *
      * @param  string  $option
-     * @param  string  $element
+     * @param  string  $name
      * @return Crawler
      */
-    public function select(string $option, string $element): Crawler
+    public function select(string $option, string $name): Crawler
     {
-        return $this->storeInput($element, $option);
+        return $this->storeInput($name, $option);
     }
 
     /**

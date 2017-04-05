@@ -7,7 +7,8 @@ use REBELinBLUE\Crawler\Crawler;
 
 class CrawlerTest extends CrawlerTestAssertions
 {
-    public function test_it_creates_new_client_when_not_provided()
+    /** @test */
+    public function it_creates_new_client_when_not_provided()
     {
         // Arrange
         $crawler = new Crawler();
@@ -26,7 +27,8 @@ class CrawlerTest extends CrawlerTestAssertions
         );
     }
 
-    public function test_it_returns_correct_client()
+    /** @test */
+    public function it_returns_correct_client()
     {
         // Arrange
         $this->mockResponse($this->getFile('welcome.html'));

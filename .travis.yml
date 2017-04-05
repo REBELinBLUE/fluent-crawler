@@ -18,11 +18,9 @@ install:
 script:
   - make lint
   - make phpcs
-  #- make phpmd
+  - make phpmd
   - make phpstan
   - make coverage
-#  - make phpcpd
-#  - make lines
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
