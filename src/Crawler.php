@@ -36,10 +36,12 @@ class Crawler
     /**
      * Constructor can take an instance of \Goutte\Client,
      * otherwise one will be initialized when needed.
+     *
+     * @param Client|null $client
      */
-    public function __construct(?Client $client = null)
+    public function __construct(Client $client = null)
     {
-        $this->client = $client;
+        $this->client = $client ?: new Client();
     }
 
     /**
@@ -49,10 +51,6 @@ class Crawler
      */
     public function getClient(): Client
     {
-        if (!$this->client) {
-            $this->client = new Client();
-        }
-
         return $this->client;
     }
 
