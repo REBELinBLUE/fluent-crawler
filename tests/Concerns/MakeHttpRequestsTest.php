@@ -29,7 +29,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         // Act
         $crawler = $this->crawler->get('http://www.example.com', $headers);
-        $request = $crawler->getClient()->getHistory()->current();
+        $request = $this->crawler->getRequest();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
@@ -47,7 +47,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         // Act
         $crawler = $this->crawler->post('http://www.example.com', $parameters, $headers, $content);
-        $request = $crawler->getClient()->getHistory()->current();
+        $request = $this->crawler->getRequest();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
@@ -65,7 +65,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         // Act
         $crawler = $this->crawler->put('http://www.example.com', $parameters, $headers, $content);
-        $request = $crawler->getClient()->getHistory()->current();
+        $request = $this->crawler->getRequest();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
@@ -83,7 +83,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         // Act
         $crawler = $this->crawler->patch('http://www.example.com', $parameters, $headers, $content);
-        $request = $crawler->getClient()->getHistory()->current();
+        $request = $this->crawler->getRequest();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);
@@ -101,7 +101,7 @@ class MakeHttpRequestsTest extends CrawlerTestAssertions
 
         // Act
         $crawler = $this->crawler->delete('http://www.example.com', $parameters, $headers, $content);
-        $request = $crawler->getClient()->getHistory()->current();
+        $request = $this->crawler->getRequest();
 
         // Assert
         $this->assertResponseMatches($crawler, $expected);

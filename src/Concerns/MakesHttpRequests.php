@@ -3,6 +3,7 @@
 namespace REBELinBLUE\Crawler\Concerns;
 
 use REBELinBLUE\Crawler\Crawler;
+use Symfony\Component\BrowserKit\Request;
 
 trait MakesHttpRequests
 {
@@ -93,6 +94,16 @@ trait MakesHttpRequests
         $server = $this->transformHeadersToServerVars($headers);
 
         return $this->makeRequest('DELETE', $uri, $parameters, $server, $body);
+    }
+
+    /**
+     * Get the request object instance for the most recent request.
+     *
+     * @return Request
+     */
+    public function getRequest(): Request
+    {
+        return $this->getClient()->getRequest();
     }
 
     protected function makeRequest(

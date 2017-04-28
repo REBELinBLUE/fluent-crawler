@@ -272,10 +272,13 @@ $crawler->getCookies(): array
 $crawler->getCookie(string $cookieName): ?string
 ```
 
-You can also get the the raw `BrowserKit` response and the `Goutte` client
+You can also get the the raw `BrowserKit` request, response and the `Goutte` client
 
 ```php
-// Get the response object from the previous request
+// Get the latest request object
+$crawler->getRequest(): Request;
+
+// Get the response object for the latest request
 $crawler->getResponse(): Response;
 
 // Get the Goutte client. This allows you to interact with the history etc.
