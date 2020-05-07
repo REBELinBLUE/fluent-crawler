@@ -22,10 +22,10 @@ PHP 7.1+ and Goutte 3.1+
 
 The recommended way to install the library is through [Composer](http://getcomposer.org).
 
-Add ``rebelinblue/fluent-web-crawler`` as a require dependency in your ``composer.json`` file:
+Add `rebelinblue/fluent-web-crawler` as a require dependency in your `composer.json` file:
 
 ```bash
-composer require fluent-web-crawler
+composer require rebelinblue/fluent-web-crawler
 ```
 
 ## Usage
