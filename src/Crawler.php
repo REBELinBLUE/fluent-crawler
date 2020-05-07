@@ -95,6 +95,8 @@ class Crawler
 
     protected function extractParametersFromForm(Form $form): array
     {
+        $parameters = [];
+
         parse_str(http_build_query($form->getValues()), $parameters);
 
         return $parameters;

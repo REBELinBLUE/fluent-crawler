@@ -9,11 +9,13 @@ RESET  := $(shell tput -Txterm sgr0)
 
 test: lint phpcs phpunit phpstan phpmd
 
+## Install dependencies
 install:
-	composer install --prefer-source --no-interaction --no-suggest
+	composer install --prefer-dist --no-interaction --no-suggest
 
+## Install dependencies with docker
 install-docker:
-	docker run --rm -it --volume $(pwd):/app prooph/composer:7.1 install --prefer-source --no-interaction --no-suggest
+	docker run --rm -it --volume `pwd`:/app prooph/composer:7.1 install --prefer-dist --no-interaction --no-suggest
 
 ## Run PHP unit tests
 phpunit:
