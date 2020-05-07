@@ -42,11 +42,11 @@ class IsSelected extends FormFieldConstraint
         foreach ($select->children() as $option) {
             if ($option->nodeName === 'optgroup') {
                 foreach ($option->childNodes as $child) {
-                    if ($child->hasAttribute('selected')) {
+                    if ($child instanceof DOMElement && $child->hasAttribute('selected')) {
                         $selected[] = $this->getOptionValue($child);
                     }
                 }
-            } elseif ($option->hasAttribute('selected')) {
+            } elseif ($option instanceof DOMElement && $option->hasAttribute('selected')) {
                 $selected[] = $this->getOptionValue($option);
             }
         }
@@ -66,7 +66,7 @@ class IsSelected extends FormFieldConstraint
     protected function getCheckedValueFromRadioGroup(Crawler $radioGroup): ?string
     {
         foreach ($radioGroup as $radio) {
-            if ($radio->hasAttribute('checked')) {
+            if ($radio instanceof DOMElement && $radio->hasAttribute('checked')) {
                 return $radio->getAttribute('value');
             }
         }

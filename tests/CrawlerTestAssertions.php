@@ -14,10 +14,10 @@ use Symfony\Component\BrowserKit\Response;
 
 abstract class CrawlerTestAssertions extends PHPUnit_Framework_TestCase
 {
-    /** @var GoutteClient $client */
+    /** @var GoutteClient */
     protected $client;
 
-    /** @var Crawler $crawler */
+    /** @var Crawler */
     protected $crawler;
 
     /** @var array */
