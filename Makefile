@@ -12,6 +12,9 @@ test: lint phpcs phpunit phpstan phpmd
 install:
 	composer install --prefer-source --no-interaction --no-suggest
 
+install-docker:
+	docker run --rm -it --volume $(pwd):/app prooph/composer:7.1 install --prefer-source --no-interaction --no-suggest
+
 ## Run PHP unit tests
 phpunit:
 	@echo "${GREEN}Unit tests${RESET}"

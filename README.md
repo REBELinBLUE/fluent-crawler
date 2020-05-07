@@ -1,11 +1,11 @@
-![logo](http://www.sainsburys.co.uk/homepage/images/sainsburys.png)
+![logo](https://www.sainsburys.co.uk/assets/images/logos_logoImage_5TrheyQtjk6OXYZV6GvC1R_sainsburys-logo.svg)
 
 Fluent Web Crawler
 ==================
 
 [![StyleCI](https://styleci.io/repos/85713671/shield?style=flat-square&branch=master)](https://styleci.io/repos/85713671)
 [![Build Status](https://img.shields.io/travis/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://travis-ci.org/REBELinBLUE/fluent-crawler)
-[![Code Climate](https://img.shields.io/codeclimate/github/REBELinBLUE/fluent-crawler.svg?style=flat-square)](https://codeclimate.com/github/REBELinBLUE/fluent-crawler)
+[![Code Climate](https://img.shields.io/codeclimate/coverage-letter/REBELinBLUE/fluent-crawler?style=flat-square)](https://codeclimate.com/github/REBELinBLUE/fluent-crawler)
 [![Code Coverage](https://img.shields.io/codecov/c/github/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://codecov.io/gh/REBELinBLUE/fluent-crawler)
 
 A web scraping library for PHP with a nice fluent interface.
