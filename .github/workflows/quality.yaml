@@ -1,0 +1,46 @@
+name: Quality Checks
+
+on: [push, pull_request]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2.1.4
+        with:
+          php-version: 7.1
+
+      - name: Lint composer.json
+        run: composer validate
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Dependency Cache
+        uses: actions/cache@v1
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-7.1
+
+      - name: Install Dependencies
+        run: composer install --no-interaction --prefer-dist --no-suggest --ignore-platform-reqs
+
+      - name: Lint
+        run: php bin/parallel-lint src/ tests/
+
+      - name: Check Code Styles
+        run: php bin/phpcs -p --standard=psr2 --colors src/
+
+      - name: PHPMD Analysis
+        run: bin/phpmd src/ text cleancode,codesize,naming,design,controversial,unusedcode
+
+      - name: Static Analysis
+        run: php bin/phpstan analyse -l 0 src/

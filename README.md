@@ -4,7 +4,7 @@ Fluent Web Crawler
 ==================
 
 [![StyleCI](https://styleci.io/repos/85713671/shield?style=flat-square&branch=master)](https://styleci.io/repos/85713671)
-[![Build Status](https://img.shields.io/travis/com/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://travis-ci.com/REBELinBLUE/fluent-crawler)
+[![Build Status](https://img.shields.io/github/workflow/status/REBELinBLUE/fluent-crawler/Tests?label=Build&style=flat-square)](https://github.com/REBELinBLUE/fluent-crawler/actions?query=workflow%3ATests)
 [![Code Climate](https://img.shields.io/codeclimate/coverage-letter/REBELinBLUE/fluent-crawler?style=flat-square)](https://codeclimate.com/github/REBELinBLUE/fluent-crawler)
 [![Code Coverage](https://img.shields.io/codecov/c/github/REBELinBLUE/fluent-crawler/master.svg?style=flat-square)](https://codecov.io/gh/REBELinBLUE/fluent-crawler)
 
@@ -12,7 +12,7 @@ A web scraping library for PHP with a nice fluent interface.
 
 A fork of [laravel/browser-kit-testing](https://github.com/laravel/browser-kit-testing), repurposed to use with real HTTP requests.
 
-Developed for a project I am working on at Sainsbury's.
+Developed for a project I worked on at Sainsbury's.
 
 ## Requirements
 
