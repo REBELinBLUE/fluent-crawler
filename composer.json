@@ -1,17 +1,17 @@
 {
-    "name": "rebelinblue/fluent-web-crawler",
+    "name": "unhandlederror/fluent-web-crawler",
     "description": "A web crawler with a fluent interface",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
-            "name": "Stephen Ball",
-            "email": "stephen.ball@sainsburys.co.uk"
+            "name": "Elizabeth Read",
+            "email": "elizabeth.read@sainsburys.co.uk"
         }
     ],
     "require": {
-        "php": ">=7.1.0",
-        "fabpot/goutte": "^3.2"
+        "php": "^8.1",
+        "symphony/browser-kit": "^6.2"
     },
     "require-dev": {
         "codeclimate/php-test-reporter": "^0.4.4",
